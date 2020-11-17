@@ -1,7 +1,9 @@
 package com.wll.bus.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wll.bus.entity.Customer;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wll.bus.vo.CustomerVo;
 
 /**
  * <p>
@@ -18,4 +20,6 @@ public interface ICustomerService extends IService<Customer> {
      * @param id    客户id
      */
     void deleteCustomerById(Integer id);
+
+    IPage<CustomerVo> list(CustomerVo customerVo);
 }

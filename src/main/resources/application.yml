@@ -6,6 +6,9 @@ spring:
       url: jdbc:mysql://192.168.158.138:3306/warehouse?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC&useSSL=false
       username: root
       password: Passw0rd@_
+#      url: jdbc:mysql://10.121.198.146:3306/warehouse?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC&useSSL=false
+#      username: root
+#      password: Password@_
       max-active: 20
       max-wait: 5000
       initial-size: 1
@@ -59,6 +62,6 @@ shiro:
 
 #修改端口号为8088
 server:
-  port: 8888
+  port: 9999
 
 

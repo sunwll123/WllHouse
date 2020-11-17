@@ -23,4 +23,14 @@ public class CustomerVo extends Customer{
      */
     private Integer[] ids;
 
+    /**
+     * 物流名称,用来记录客户经常需要发送的物流信息
+     */
+    private String logisticsName;
+
+    /**
+     * 物流电话
+     */
+    private String logisticsPhone;
+
 }

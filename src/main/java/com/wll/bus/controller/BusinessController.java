@@ -75,4 +75,9 @@ public class BusinessController {
         return "business/salesback/salesbackManager";
     }
 
+    @RequestMapping("toLogisticsBase")
+    public String toLogiticsBase(){
+        return "business/logistics/logisticsBase";
+    }
+
 }

@@ -1,10 +1,15 @@
 package com.wll.bus.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wll.bus.entity.Customer;
 import com.wll.bus.mapper.CustomerMapper;
 import com.wll.bus.mapper.GoodsMapper;
 import com.wll.bus.service.ICustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wll.bus.vo.CustomerVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +31,8 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
 
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @Override
     public boolean save(Customer entity) {
@@ -62,5 +69,13 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         //根据客户id删除商品销售退货
         goodsMapper.deleteSaleBackByCustomerId(id);
         this.removeById(id);
+    }
+
+    @Override
+    public IPage<CustomerVo> list(CustomerVo customerVo) {
+        IPage<CustomerVo> page = new Page<>();
+        page.setSize(customerVo.getLimit());
+        page.setCurrent(customerVo.getPage());
+        return customerMapper.selectListByCondition(page,customerVo.getCustomername(),customerVo.getPhone(),customerVo.getLogisticsName());
     }
 }

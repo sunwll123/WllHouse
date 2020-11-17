@@ -45,13 +45,7 @@ public class CustomerController {
     @RequestMapping("loadAllCustomer")
     public DataGridView loadAllCustomer(CustomerVo customerVo){
         //1.声明一个分页page对象
-        IPage<Customer> page = new Page<Customer>(customerVo.getPage(),customerVo.getLimit());
-        //2.声明一个queryWrapper
-        LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(StringUtils.isNotBlank(customerVo.getCustomername()),Customer::getCustomername,customerVo.getCustomername());
-        queryWrapper.like(StringUtils.isNotBlank(customerVo.getLogisticsName()),Customer::getLogisticsName,customerVo.getLogisticsName());
-        queryWrapper.like(StringUtils.isNotBlank(customerVo.getPhone()),Customer::getPhone,customerVo.getPhone());
-        customerService.page(page,queryWrapper);
+        IPage<CustomerVo> page = customerService.list(customerVo);
         return new DataGridView(page.getTotal(),page.getRecords());
     }
 

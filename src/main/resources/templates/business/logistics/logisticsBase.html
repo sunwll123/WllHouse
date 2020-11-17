@@ -25,22 +25,24 @@
 <form action="" method="post" id="searchFrm" lay-filter="searchFrm" class="layui-form">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">客户名称</label>
-            <div class="layui-input-inline">
-                <input type="text" name="customername" id="customername" class="layui-input input-radius"
-                       placeholder="请输入客户名称">
-            </div>
-        </div>
-        <div class="layui-inline">
             <label class="layui-form-label">物流名称</label>
             <div class="layui-input-inline">
                 <input type="text" name="logisticsName" id="logisticsName" class="layui-input input-radius" placeholder="请输入物流名称">
             </div>
         </div>
+
         <div class="layui-inline">
-            <label class="layui-form-label">联系电话</label>
+            <label class="layui-form-label">物流覆盖区域</label>
             <div class="layui-input-inline">
-                <input type="text" name="phone" id="phone" class="layui-input input-radius" placeholder="请输入联系电话">
+                <input type="text" name="logisticsScope" id="customername" class="layui-input input-radius"
+                       placeholder="请输入物流覆盖区域">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">物流电话</label>
+            <div class="layui-input-inline">
+                <input type="text" name="logisticsPhone" id="logisticsPhone" class="layui-input input-radius" placeholder="请输入物流电话">
             </div>
         </div>
     </div>
@@ -58,14 +60,14 @@
 
 <!--数据表格-->
 <div>
-    <table class="layui-hide" id="customerTable" lay-filter="customerTable"></table>
-    <div id="customerToolBar" style="display: none">
-        <button type="button" lay-event="add" shiro:hasPermission="customer:create" class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius">
-            <i class="layui-icon layui-icon-add-1"></i>添加客户
+    <table class="layui-hide" id="logisticsBaseTable" lay-filter="logisticsBaseTable"></table>
+    <div id="logisticsBaseToolBar" style="display: none">
+        <button type="button" lay-event="add" shiro:hasPermission="logisticsBase:create" class="layui-btn layui-btn-sm layui-btn-normal layui-btn-radius">
+            <i class="layui-icon layui-icon-add-1"></i>添加
         </button>
     </div>
-    <div id="customerRowBar" style="display: none;">
-        <button type="button" lay-event="update" shiro:hasPermission="customer:update" class="layui-btn layui-btn-sm layui-btn-radius"><i
+    <div id="logisticsBaseRowBar" style="display: none;">
+        <button type="button" lay-event="update" shiro:hasPermission="logisticsBase:update" class="layui-btn layui-btn-sm layui-btn-radius"><i
                 class="layui-icon layui-icon-edit"></i>编辑
         </button>
         <button type="button" lay-event="delete" shiro:hasPermission="customer:delete" class="layui-btn layui-btn-sm layui-btn-danger layui-btn-radius"><i
@@ -79,42 +81,35 @@
     <form action="" method="post" class="layui-form" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">客户名称</label>
-                <div class="layui-input-block">
-                    <input type="hidden" name="id">
-                    <input type="text" name="customername" lay-verify="required" autocomplete="off"
-                           class="layui-input input-radius" placeholder="请输入客户名称">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">客户地址</label>
-                <div class="layui-input-block">
-                    <input type="text" name="address" lay-verify="required" autocomplete="off" class="layui-input input-radius" placeholder="请输入客户地址">
-                </div>
-            </div>
-            <div class="layui-inline">
-                <label class="layui-form-label">联系电话</label>
-                <div class="layui-input-block">
-                    <input type="text" name="phone" lay-verify="required|number" autocomplete="off" class="layui-input input-radius" placeholder="请输入联系电话">
-                </div>
-            </div>
-
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
                 <label class="layui-form-label">物流名称</label>
                 <div class="layui-input-block">
-                    <input type="text" name="logisticsName"  autocomplete="off" class="layui-input input-radius" placeholder="请输入物流名称">
+                    <input type="hidden" name="id">
+                    <input type="text" name="logisticsName"  autocomplete="off"
+                           class="layui-input input-radius" placeholder="请输入物流名称">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">物流覆盖区域</label>
+                <div class="layui-input-block">
+                    <input type="text" name="logisticsScope" autocomplete="off" class="layui-input input-radius" placeholder="请输入物流覆盖区域以,间隔">
                 </div>
             </div>
             <div class="layui-inline">
                 <label class="layui-form-label">物流电话</label>
                 <div class="layui-input-block">
-                    <input type="text" name="logisticsPhone"  autocomplete="off" class="layui-input input-radius" placeholder="请输入物流电话">
+                    <input type="text" name="logisticsPhone" lay-verify="number" autocomplete="off" class="layui-input input-radius" placeholder="请输入物流电话">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">物流单价</label>
+                <div class="layui-input-block">
+                    <input type="text" name="logisticsCost" lay-verify="number" autocomplete="off" class="layui-input input-radius" placeholder="请输入物流单价">
                 </div>
             </div>
 
         </div>
+
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">是否可用</label>
@@ -153,25 +148,24 @@
 
         //初始化表格 加载数据
         tableIns = table.render({
-            elem: "#customerTable",
-            title: "客户数据表格",
-            url: "/customer/loadAllCustomer",
-            toolbar: "#customerToolBar",
+            elem: "#logisticsBaseTable",
+            title: "物流基本数据表格",
+            url: "/logisticsBase/loadAllList",
+            toolbar: "#logisticsBaseToolBar",
             page: true,
             height: "full-180",
             cols: [ [
                 {type:'checkbox',fixed:'left'},
                 {field: 'id', title: 'ID', align: 'center',width:'50'},
-                {field: 'customername', title: '客户名称', align: 'center',width:'100'},
-                {field: 'address', title: '客户地址', align: 'center',width:'150'},
-                {field: 'phone', title: '联系电话', align: 'center',width:'140'},
-                {field: 'logisticsName', title: '物流名称', align: 'center',width:'130'},
+                {field: 'logisticsName', title: '物流名称', align: 'center',width:'100'},
+                {field: 'logisticsScope', title: '物流覆盖区域', align: 'center',width:'230'},
+                {field: 'logisticsPhone', title: '物流电话', align: 'center',width:'150'},
+                {field: 'logisticsCost', title: '物流单价', align: 'center',width:'100'},
                 {field: 'logisticsPhone', title: '物流电话', align: 'center',width:'130'},
-                {field: 'logisticsBaseId', hide: 'true'},
                 {field: 'available', title: '是否可用', align: 'center',width:'100',templet:function (d) {
-                    return d.available==1?'<font color="blue">可用</font>':'<font color="red">不可用</font>';
-                }},
-                {fixed: 'right', title: '操作', toolbar: '#customerRowBar', align: 'center',width:'180'}
+                        return d.available==1?'<font color="blue">可用</font>':'<font color="red">不可用</font>';
+                    }},
+                {fixed: 'right', title: '操作', toolbar: '#logisticsBaseRowBar', align: 'center',width:'180'}
             ] ],
             done: function (data, curr, count) {
                 //不是第一页时，如果当前返回的数据为0那么就返回上一页
@@ -197,27 +191,28 @@
         });
 
         //监控工具条事件
-        table.on("toolbar(customerTable)", function (obj) {
+        table.on("toolbar(logisticsBaseTable)", function (obj) {
             switch (obj.event) {
                 case 'add':
                     openAddLayer();
                     break;
                 case 'deleteBatch':
-                    batchDeleteCustomer();
+                    // 批量删除 TODO
+                    batchDeleteLogisticsBase();
                     break;
             };
         });
 
         //监控行工具条事件
-        table.on("tool(customerTable)", function (obj) {
+        table.on("tool(logisticsBaseTable)", function (obj) {
             //获取当前行数据
             var data = obj.data;
             switch (obj.event) {
                 case 'delete':
-                    deleteCustomer(data);
+                    deleteLogisticsBase(data);
                     break;
                 case 'update':
-                    updateCustomer(data);
+                    updateLogisticsBase(data);
                     break;
             };
         });
@@ -231,16 +226,16 @@
                 type:1,
                 content:$("#addOrUpdateDiv"),
                 area:['700px','500px'],
-                title:'添加客户',
+                title:'添加物流',
                 success:function () {
                     $("#dataFrm")[0].reset();
-                    url="/customer/addCustomer";
+                    url="/logisticsBase/add";
                 }
             });
         }
 
         //打开修改的弹出层
-        function updateCustomer(data) {
+        function updateLogisticsBase(data) {
             mainIndex = layer.open({
                 type:1,
                 content:$("#addOrUpdateDiv"),
@@ -251,7 +246,7 @@
                     $("#dataFrm")[0].reset();
                     //装载新的数据
                     form.val("dataFrm",data);
-                    url="/customer/updateCustomer";
+                    url="/logisticsBase/update";
                 }
             });
         }
@@ -269,9 +264,9 @@
 
 
         //删除
-        function deleteCustomer(data) {
-            layer.confirm('你确定要删除【' + data.customername + '】这个客户吗？', {icon: 3, title: '提示'}, function (index) {
-                $.post("/customer/deleteCustomer", {id: data.id},function (res) {
+        function deleteLogisticsBase(data) {
+            layer.confirm('你确定要删除【' + data.logisticsName + '】这个物流信息吗？', {icon: 3, title: '提示'}, function (index) {
+                $.post("/logisticsBase/delete", {id: data.id},function (res) {
                     if (res.code == 200) {
                         tableIns.reload({
                             where:"",

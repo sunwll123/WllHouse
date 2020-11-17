@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wll.bus.mapper.CustomerMapper">
 
+    <select id="selectListByCondition" resultType="com.wll.bus.vo.CustomerVo">
+        select
+        br.id as id,
+        br.phone as phone,
+        blb.id as logisticsBaseId,
+        br.address as address,
+        br.available as available,
+        br.customername as customername,
+        blb.logistics_name as logisticsName,
+        blb.logistics_phone as logisticsPhone
+        from
+        bus_customer br
+        left join bus_logistics_base blb on blb.id = br.logistics_base_id
+        where 1=1
+        <if test="logisticsName != null and logisticsName != '' ">
+            and blb.logistics_name like concat(concat("%",#{logisticsName},"%"))
+        </if>
+        <if test="customername != null and customername != '' ">
+            and br.customername like concat(concat("%",#{customername},"%"))
+        </if>
+        <if test="phone != null and phone != '' ">
+            and br.phone like concat(concat("%",#{phone},"%"))
+        </if>
+        ORDER BY blb.logistics_cost
+    </select>
+
 </mapper>

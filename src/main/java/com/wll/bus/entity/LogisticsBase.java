@@ -11,44 +11,44 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * <p>
- * InnoDB free: 9216 kB
- * </p>
- *
- * @author luoyi-
- * @since 2019-12-05
+ * @Author: jzl
+ * @Description:
+ * @Date: Created in 15:13 2020/11/17
+ * @Modified By:
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("bus_customer")
+@TableName("bus_logistics_base")
 @ToString
-public class Customer implements Serializable {
+public class LogisticsBase implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    /**
-     * 客户姓名
-     */
-    private String customername;
 
     /**
-     * 客户地址
+     * 物流名称
      */
-    private String address;
+    private String logisticsName;
 
     /**
-     * 客户电话
+     * 物流覆盖区域
      */
-    private String phone;
+    private String logisticsScope;
+
 
     /**
-     * 物流基础信息id
+     * 物流电话
      */
-    private Integer logisticsBaseId;
+    private String logisticsPhone;
+
+    /**
+     * 物流单价
+     */
+    private Double logisticsCost;
 
 
     /**
