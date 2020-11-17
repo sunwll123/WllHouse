@@ -11,10 +11,10 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * @Author: jzl
- * @Description:
- * @Date: Created in 15:13 2020/11/17
- * @Modified By:
+ *
+ * @Description: 物流基础信息管理entity层
+ * @author wll
+ * @since 2020-11-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

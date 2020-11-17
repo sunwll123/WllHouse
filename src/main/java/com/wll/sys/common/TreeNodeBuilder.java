@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * 把没有层级关系的集合变成有层级关系的集合
- * @Author: 落亦-
- * @Date: 2019/11/22 16:31
+ * @author wll
+ * @since 2020-11-11
  */
 public class TreeNodeBuilder {
     public static List<TreeNode> build(List<TreeNode> treeNodes, Integer topPid) {

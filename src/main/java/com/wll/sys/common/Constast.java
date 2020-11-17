@@ -1,8 +1,8 @@
 package com.wll.sys.common;
 
 /**
- * @Author: 落亦-
- * @Date: 2019/11/21 21:39
+ * @author wll
+ * @since 2020-11-11
  */
 public class Constast {
 

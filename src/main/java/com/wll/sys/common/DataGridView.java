@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * json数据实体
- * @Author: 落亦-
- * @Date: 2019/11/22 15:17
+ * @author wll
+ * @since 2020-11-11
  */
 @Data
 @AllArgsConstructor

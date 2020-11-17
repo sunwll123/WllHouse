@@ -11,8 +11,8 @@ import java.io.Serializable;
  * InnoDB free: 9216 kB Mapper 接口
  * </p>
  *
- * @author luoyi-
- * @since 2019-11-22
+ * @author wll
+ * @since 2020-11-11
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 

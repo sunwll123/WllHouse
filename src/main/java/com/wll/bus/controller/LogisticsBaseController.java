@@ -23,10 +23,11 @@ import java.util.List;
 
 
 /**
- * @Author: jzl
- * @Description:
- * @Date: Created in 16:42 2020/11/17
- * @Modified By:
+ * @Author: wll
+ * @Description: 物流基础管理控制层
+ * @author wll
+ * @since 2020-11-11
+ *
  */
 @RestController
 @RequestMapping("/logisticsBase")
@@ -98,7 +99,7 @@ public class LogisticsBaseController {
     @RequestMapping(value = "delete",method = RequestMethod.POST)
     public ResultObj deleteCustomer(Integer id){
         try {
-            logisticsBaseService.removeById(id);
+            logisticsBaseService.deleteLogisticsBaseById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
             log.error("删除物流id为：{}的物流信息失败",id,e);

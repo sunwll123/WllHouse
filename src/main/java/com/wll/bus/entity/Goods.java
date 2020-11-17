@@ -16,8 +16,8 @@ import java.io.Serializable;
  * InnoDB free: 9216 kB; (`providerid`) REFER `warehouse/bus_provider`(`id`)
  * </p>
  *
- * @author luoyi-
- * @since 2019-12-06
+ * @author wll
+ * @since 2020-11-11
  */
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)

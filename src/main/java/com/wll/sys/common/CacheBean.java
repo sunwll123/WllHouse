@@ -3,8 +3,8 @@ package com.wll.sys.common;
 import com.alibaba.fastjson.JSON;
 
 /**
- * @Author: 落亦-
- * @Date: 2019/12/20 18:40
+ * @author wll
+ * @since 2020-11-11
  */
 public class CacheBean {
 

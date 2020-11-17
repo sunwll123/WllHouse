@@ -10,8 +10,8 @@ import com.wll.bus.vo.CustomerVo;
  * InnoDB free: 9216 kB 服务类
  * </p>
  *
- * @author luoyi-
- * @since 2019-12-05
+ * @author wll
+ * @since 2020-11-11
  */
 public interface ICustomerService extends IService<Customer> {
 

@@ -11,7 +11,8 @@ import org.springframework.util.unit.DataSize;
 import javax.servlet.MultipartConfigElement;
 
 /**
- * @author luoyi-
+ * @author wll
+ * @since 2020-11-05
  */
 @Configuration
 @SpringBootApplication

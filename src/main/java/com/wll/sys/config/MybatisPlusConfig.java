@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 
 /**
- * @Author: 落亦-
- * @Date: 2019/11/23 19:16
+ * @author wll
+ * @since 2020-11-11
  */
 @Configuration
 @ConditionalOnClass(value= {PaginationInterceptor.class})

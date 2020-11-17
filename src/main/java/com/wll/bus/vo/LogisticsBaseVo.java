@@ -5,10 +5,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * @Author: jzl
- * @Description:
- * @Date: Created in 16:52 2020/11/17
- * @Modified By:
+ *
+ * @Description: 物流基础信息管理vo层
+ * @author wll
+ * @since 2020-11-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

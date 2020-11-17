@@ -1,10 +1,8 @@
 package com.wll.bus.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wll.bus.entity.Customer;
 import com.wll.bus.service.ICustomerService;
 import com.wll.bus.vo.CustomerVo;
@@ -14,7 +12,6 @@ import com.wll.sys.common.ResultObj;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,7 +24,7 @@ import java.util.List;
  * InnoDB free: 9216 kB 前端控制器
  * </p>
  *
- * @author luoyi-
+ * @author wll
  * @since 2019-12-05
  */
 @RestController

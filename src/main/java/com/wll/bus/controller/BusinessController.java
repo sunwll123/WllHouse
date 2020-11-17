@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * 业务管理的路由器
- * @Author: 落亦-
- * @Date: 2019/12/5 9:33
+ * @Author: wll
+ * @Date: 2020/11/5 9:33
  */
 @Controller
 @RequestMapping("bus")
@@ -75,6 +75,10 @@ public class BusinessController {
         return "business/salesback/salesbackManager";
     }
 
+    /**
+     * 跳转到物流基础信息管理页面
+     * @return
+     */
     @RequestMapping("toLogisticsBase")
     public String toLogiticsBase(){
         return "business/logistics/logisticsBase";
