@@ -28,9 +28,4 @@ public class CustomerVo extends Customer{
      */
     private String logisticsName;
 
-    /**
-     * 物流电话
-     */
-    private String logisticsPhone;
-
 }

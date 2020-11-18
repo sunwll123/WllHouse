@@ -10,14 +10,13 @@
         br.address as address,
         br.available as available,
         br.customername as customername,
-        blb.logistics_name as logisticsName,
-        blb.logistics_phone as logisticsPhone
+        blb.logistics_name as logisticsName
         from
         bus_customer br
         left join bus_logistics_base blb on blb.id = br.logistics_base_id
         where 1=1
-        <if test="logisticsName != null and logisticsName != '' ">
-            and blb.logistics_name like concat(concat("%",#{logisticsName},"%"))
+        <if test="logisticsBaseId != null and logisticsBaseId != 0">
+            and blb.id = #{logisticsBaseId}
         </if>
         <if test="customername != null and customername != '' ">
             and br.customername like concat(concat("%",#{customername},"%"))

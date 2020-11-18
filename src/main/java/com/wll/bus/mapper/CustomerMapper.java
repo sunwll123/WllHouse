@@ -16,6 +16,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface CustomerMapper extends BaseMapper<Customer> {
 
-    IPage<CustomerVo> selectListByCondition(IPage<CustomerVo> page, @Param("customername") String customername, @Param("phone") String phone, @Param("logisticsName") String logisticsName);
+    IPage<CustomerVo> selectListByCondition(IPage<CustomerVo> page, @Param("customername") String customername, @Param("phone") String phone, @Param("logisticsBaseId") Integer logisticsName);
 
 }

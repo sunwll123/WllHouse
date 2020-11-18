@@ -76,6 +76,6 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         IPage<CustomerVo> page = new Page<>();
         page.setSize(customerVo.getLimit());
         page.setCurrent(customerVo.getPage());
-        return customerMapper.selectListByCondition(page,customerVo.getCustomername(),customerVo.getPhone(),customerVo.getLogisticsName());
+        return customerMapper.selectListByCondition(page,customerVo.getCustomername(),customerVo.getPhone(),customerVo.getLogisticsBaseId());
     }
 }
