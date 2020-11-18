@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-17 22:43:22
+Date: 2020-11-18 22:49:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,7 +27,7 @@ CREATE TABLE `bus_customer` (
   `available` int(11) DEFAULT NULL,
   `logistics_base_id` int(11) DEFAULT NULL COMMENT '用来关联物流信息',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_customer
@@ -36,6 +36,7 @@ INSERT INTO `bus_customer` VALUES ('1', '小张布艺', '商丘', '15279230588',
 INSERT INTO `bus_customer` VALUES ('2', '小丽布艺', '南阳', '13064154936', '1', '2');
 INSERT INTO `bus_customer` VALUES ('3', '小红布艺', '心想', '13617020687', '1', '2');
 INSERT INTO `bus_customer` VALUES ('4', '一帘幽梦', '十里大道1039号', '13648524759', '1', '3');
+INSERT INTO `bus_customer` VALUES ('15', '真真', '南阳', '123456', '1', '3');
 
 -- ----------------------------
 -- Table structure for bus_goods
@@ -116,10 +117,10 @@ CREATE TABLE `bus_logistics_base` (
   `logistics_name` varchar(255) DEFAULT NULL,
   `logistics_scope` varchar(1000) DEFAULT NULL,
   `logistics_phone` varchar(255) DEFAULT NULL,
-  `available` int(11) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
   `logistics_cost` decimal(10,2) DEFAULT NULL COMMENT '物流单价',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_logistics_base
@@ -127,6 +128,8 @@ CREATE TABLE `bus_logistics_base` (
 INSERT INTO `bus_logistics_base` VALUES ('1', '达发物流', '陕县,开封', '15290865083', '1', '10.00');
 INSERT INTO `bus_logistics_base` VALUES ('2', '创新物流', '商丘,民权', '15290865084', '1', '10.00');
 INSERT INTO `bus_logistics_base` VALUES ('3', '安利物流', '新郑,开封', '15290865085', '1', '10.50');
+INSERT INTO `bus_logistics_base` VALUES ('12', '方圆物流', '开封', '123456', '1', '10.00');
+INSERT INTO `bus_logistics_base` VALUES ('13', '浩宇物流', '浙江', '1256489', '2', '80.00');
 
 -- ----------------------------
 -- Table structure for bus_outport
@@ -269,7 +272,7 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=349 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -570,6 +573,45 @@ INSERT INTO `sys_loginfo` VALUES ('306', '超级管理员-system', '0:0:0:0:0:0:
 INSERT INTO `sys_loginfo` VALUES ('307', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 05:25:12');
 INSERT INTO `sys_loginfo` VALUES ('308', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 12:26:51');
 INSERT INTO `sys_loginfo` VALUES ('309', '超级管理员-system', '192.168.30.1', '2020-11-17 14:40:41');
+INSERT INTO `sys_loginfo` VALUES ('310', '超级管理员-system', '192.168.30.1', '2020-11-17 14:45:03');
+INSERT INTO `sys_loginfo` VALUES ('311', '超级管理员-system', '192.168.30.1', '2020-11-17 15:18:31');
+INSERT INTO `sys_loginfo` VALUES ('312', '超级管理员-system', '192.168.30.1', '2020-11-17 15:23:36');
+INSERT INTO `sys_loginfo` VALUES ('313', '超级管理员-system', '192.168.30.1', '2020-11-17 15:37:14');
+INSERT INTO `sys_loginfo` VALUES ('314', '超级管理员-system', '192.168.30.1', '2020-11-17 15:41:53');
+INSERT INTO `sys_loginfo` VALUES ('315', '超级管理员-system', '192.168.30.1', '2020-11-17 15:44:40');
+INSERT INTO `sys_loginfo` VALUES ('316', '超级管理员-system', '192.168.30.1', '2020-11-17 15:46:29');
+INSERT INTO `sys_loginfo` VALUES ('317', '超级管理员-system', '192.168.30.1', '2020-11-17 15:51:03');
+INSERT INTO `sys_loginfo` VALUES ('318', '超级管理员-system', '192.168.30.1', '2020-11-17 15:54:05');
+INSERT INTO `sys_loginfo` VALUES ('319', '超级管理员-system', '192.168.30.1', '2020-11-17 16:02:11');
+INSERT INTO `sys_loginfo` VALUES ('320', '超级管理员-system', '192.168.30.1', '2020-11-17 16:04:14');
+INSERT INTO `sys_loginfo` VALUES ('321', '超级管理员-system', '192.168.30.1', '2020-11-17 16:08:58');
+INSERT INTO `sys_loginfo` VALUES ('322', '超级管理员-system', '192.168.30.1', '2020-11-17 16:13:20');
+INSERT INTO `sys_loginfo` VALUES ('323', '超级管理员-system', '192.168.30.1', '2020-11-17 16:15:55');
+INSERT INTO `sys_loginfo` VALUES ('324', '超级管理员-system', '192.168.30.1', '2020-11-17 16:21:51');
+INSERT INTO `sys_loginfo` VALUES ('325', '超级管理员-system', '192.168.30.1', '2020-11-17 16:24:15');
+INSERT INTO `sys_loginfo` VALUES ('326', '超级管理员-system', '192.168.30.1', '2020-11-17 16:40:57');
+INSERT INTO `sys_loginfo` VALUES ('327', '超级管理员-system', '192.168.30.1', '2020-11-17 16:43:14');
+INSERT INTO `sys_loginfo` VALUES ('328', '超级管理员-system', '192.168.30.1', '2020-11-17 16:44:01');
+INSERT INTO `sys_loginfo` VALUES ('329', '超级管理员-system', '192.168.30.1', '2020-11-17 16:45:29');
+INSERT INTO `sys_loginfo` VALUES ('330', '超级管理员-system', '192.168.30.1', '2020-11-17 16:51:26');
+INSERT INTO `sys_loginfo` VALUES ('331', '超级管理员-system', '192.168.30.1', '2020-11-17 16:54:12');
+INSERT INTO `sys_loginfo` VALUES ('332', '超级管理员-system', '192.168.30.1', '2020-11-17 16:55:45');
+INSERT INTO `sys_loginfo` VALUES ('333', '超级管理员-system', '192.168.30.1', '2020-11-17 16:59:07');
+INSERT INTO `sys_loginfo` VALUES ('334', '超级管理员-system', '192.168.30.1', '2020-11-17 17:04:45');
+INSERT INTO `sys_loginfo` VALUES ('335', '超级管理员-system', '192.168.30.1', '2020-11-18 11:40:47');
+INSERT INTO `sys_loginfo` VALUES ('336', '超级管理员-system', '192.168.30.1', '2020-11-18 12:12:37');
+INSERT INTO `sys_loginfo` VALUES ('337', '超级管理员-system', '192.168.30.1', '2020-11-18 12:13:26');
+INSERT INTO `sys_loginfo` VALUES ('338', '超级管理员-system', '192.168.30.1', '2020-11-18 12:35:00');
+INSERT INTO `sys_loginfo` VALUES ('339', '超级管理员-system', '192.168.30.1', '2020-11-18 12:36:15');
+INSERT INTO `sys_loginfo` VALUES ('340', '超级管理员-system', '192.168.30.1', '2020-11-18 12:38:45');
+INSERT INTO `sys_loginfo` VALUES ('341', '超级管理员-system', '192.168.30.1', '2020-11-18 12:41:18');
+INSERT INTO `sys_loginfo` VALUES ('342', '超级管理员-system', '192.168.30.1', '2020-11-18 13:58:14');
+INSERT INTO `sys_loginfo` VALUES ('343', '超级管理员-system', '192.168.30.1', '2020-11-18 14:01:00');
+INSERT INTO `sys_loginfo` VALUES ('344', '超级管理员-system', '192.168.30.1', '2020-11-18 14:03:40');
+INSERT INTO `sys_loginfo` VALUES ('345', '超级管理员-system', '192.168.30.1', '2020-11-18 14:17:42');
+INSERT INTO `sys_loginfo` VALUES ('346', '超级管理员-system', '192.168.30.1', '2020-11-18 14:20:11');
+INSERT INTO `sys_loginfo` VALUES ('347', '超级管理员-system', '192.168.30.1', '2020-11-18 14:27:02');
+INSERT INTO `sys_loginfo` VALUES ('348', '超级管理员-system', '192.168.30.1', '2020-11-18 14:47:27');
 
 -- ----------------------------
 -- Table structure for sys_notice

@@ -52,9 +52,9 @@ public class LogisticsBase implements Serializable {
 
 
     /**
-     * 0代表不可用，1代表可用
+     * 0代表共同的物流，1代表客户，2代表供应商
      */
-    private Integer available;
+    private Integer type;
 
 
 }

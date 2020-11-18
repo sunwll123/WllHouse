@@ -109,15 +109,26 @@ public class LogisticsBaseController {
 
 
     /**
-     * 加载所有物流的下拉列表
+     * 加载客户所有物流的下拉列表
      * @return
      */
     @RequestMapping("loadAllLogisticsBaseForSelect")
-    public DataGridView loadAllCustomerForSelect(){
+    public DataGridView loadAllCustomerLogisticsForSelect(){
         LambdaQueryWrapper<LogisticsBase> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(LogisticsBase::getAvailable, Constast.AVAILABLE_TRUE);
+        queryWrapper.in(LogisticsBase::getType, 0,1);
         List<LogisticsBase> list = logisticsBaseService.list(queryWrapper);
         return new DataGridView(list);
     }
 
+    /**
+     * 加载客户所有物流的下拉列表
+     * @return
+     */
+    @RequestMapping("loadAllProviderLogisticsForSelect")
+    public DataGridView loadAllProviderLogisticsForSelect(){
+        LambdaQueryWrapper<LogisticsBase> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(LogisticsBase::getType, 0,2);
+        List<LogisticsBase> list = logisticsBaseService.list(queryWrapper);
+        return new DataGridView(list);
+    }
 }

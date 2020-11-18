@@ -112,10 +112,11 @@
 
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">是否可用</label>
+                <label class="layui-form-label">物流类型</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="available" value="1" title="可用" checked="">
-                    <input type="radio" name="available" value="0" title="不可用">
+                    <input type="radio" name="type" value="0" title="公共">
+                    <input type="radio" name="type" value="1" title="客户">
+                    <input type="radio" name="type" value="2" title="供应商">
                 </div>
             </div>
         </div>
@@ -158,12 +159,16 @@
                 {type:'checkbox',fixed:'left'},
                 {field: 'id', title: 'ID', align: 'center',width:'50'},
                 {field: 'logisticsName', title: '物流名称', align: 'center',width:'100'},
-                {field: 'logisticsScope', title: '覆盖区域', align: 'center',width:'230'},
-                {field: 'logisticsPhone', title: '物流电话', align: 'center',width:'150'},
+                {field: 'logisticsScope', title: '覆盖区域', align: 'center',width:'260'},
+                {field: 'logisticsPhone', title: '物流电话', align: 'center',width:'120'},
                 {field: 'logisticsCost', title: '物流单价', align: 'center',width:'100'},
                 {field: 'logisticsPhone', title: '物流电话', align: 'center',width:'130'},
-                {field: 'available', title: '是否可用', align: 'center',width:'100',templet:function (d) {
-                        return d.available==1?'<font color="blue">可用</font>':'<font color="red">不可用</font>';
+                {field: 'type', title: '物流类型', align: 'center',width:'100',templet:function (d) {
+                    if (d.type == 0) {
+                        return '<font color="blue">公共</font>';
+                    }else {
+                        return d.type == 1 ? '<font color="blue">客户</font>':'<font color="blue">供应商</font>';
+                    }
                     }},
                 {fixed: 'right', title: '操作', toolbar: '#logisticsBaseRowBar', align: 'center',width:'180'}
             ] ],
