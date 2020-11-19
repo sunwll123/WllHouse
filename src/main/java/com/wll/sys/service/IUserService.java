@@ -1,7 +1,9 @@
 package com.wll.sys.service;
 
+import com.wll.sys.common.DataGridView;
 import com.wll.sys.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wll.sys.vo.UserVo;
 
 /**
  * <p>
@@ -26,4 +28,12 @@ public interface IUserService extends IService<User> {
      * @return
      */
     Boolean queryMgrByUserId(Integer userId);
+
+    /**
+     *
+     * @param userVo
+     * @return
+     */
+    DataGridView loadAllUser(UserVo userVo);
+
 }

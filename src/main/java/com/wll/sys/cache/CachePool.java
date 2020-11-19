@@ -7,9 +7,9 @@ import com.wll.bus.mapper.CustomerMapper;
 import com.wll.bus.mapper.GoodsMapper;
 import com.wll.bus.mapper.ProviderMapper;
 import com.wll.sys.common.SpringUtil;
-import com.wll.sys.entity.Dept;
+import com.wll.sys.entity.Tenant;
 import com.wll.sys.entity.User;
-import com.wll.sys.mapper.DeptMapper;
+import com.wll.sys.mapper.TenantMapper;
 import com.wll.sys.mapper.UserMapper;
 
 import java.util.HashMap;
@@ -49,10 +49,10 @@ public class CachePool {
      */
     public static void syncData(){
         //同步部门数据
-        DeptMapper deptMapper = SpringUtil.getBean(DeptMapper.class);
-        List<Dept> deptList = deptMapper.selectList(null);
-        for (Dept dept : deptList) {
-            CACHE_CONTAINER.put("dept:"+dept.getId(),dept);
+        TenantMapper deptMapper = SpringUtil.getBean(TenantMapper.class);
+        List<Tenant> deptList = deptMapper.selectList(null);
+        for (Tenant dept : deptList) {
+            CACHE_CONTAINER.put("tenant:"+dept.getId(),dept);
         }
         //同步用户数据
         UserMapper userMapper = SpringUtil.getBean(UserMapper.class);

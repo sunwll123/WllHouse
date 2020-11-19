@@ -16,7 +16,8 @@ public class UserVo extends User {
     private Integer limit=10;
 
     /**
-     * 验证码
+     * 租户名称
      */
-    private String code;
+    private String tenantName;
+
 }

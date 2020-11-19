@@ -1,6 +1,6 @@
 package com.wll.sys.vo;
 
-import com.wll.sys.entity.Dept;
+import com.wll.sys.entity.Tenant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class DeptVo extends Dept {
+public class TenantVo extends Tenant {
 
     private Integer page=1;
     private Integer limit=10;

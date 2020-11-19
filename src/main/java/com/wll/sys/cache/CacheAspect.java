@@ -1,6 +1,6 @@
 package com.wll.sys.cache;
 
-import com.wll.sys.entity.Dept;
+import com.wll.sys.entity.Tenant;
 import com.wll.sys.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,12 +35,12 @@ public class CacheAspect {
     /**
      * 声明部门的切面表达式
      */
-    private static final String POINTCUT_DEPT_ADD="execution(* com.wll.sys.service.impl.DeptServiceImpl.save(..))";
-    private static final String POINTCUT_DEPT_UPDATE="execution(* com.wll.sys.service.impl.DeptServiceImpl.updateById(..))";
-    private static final String POINTCUT_DEPT_GET="execution(* com.wll.sys.service.impl.DeptServiceImpl.getById(..))";
-    private static final String POINTCUT_DEPT_DELETE="execution(* com.wll.sys.service.impl.DeptServiceImpl.removeById(..))";
+    private static final String POINTCUT_DEPT_ADD="execution(* com.wll.sys.service.impl.TenantServiceImpl.save(..))";
+    private static final String POINTCUT_DEPT_UPDATE="execution(* com.wll.sys.service.impl.TenantServiceImpl.updateById(..))";
+    private static final String POINTCUT_DEPT_GET="execution(* com.wll.sys.service.impl.TenantServiceImpl.getById(..))";
+    private static final String POINTCUT_DEPT_DELETE="execution(* com.wll.sys.service.impl.TenantServiceImpl.removeById(..))";
 
-    private static final String CACHE_DEPT_PROFIX="dept:";
+    private static final String CACHE_DEPT_PROFIX="tenant:";
 
     /**
      * 添加部门切入
@@ -50,7 +50,7 @@ public class CacheAspect {
     @Around(value = POINTCUT_DEPT_ADD)
     public Object cacheDeptAdd(ProceedingJoinPoint joinPoint) throws Throwable {
         //取出第一个参数
-        Dept object = (Dept) joinPoint.getArgs()[0];
+        Tenant object = (Tenant) joinPoint.getArgs()[0];
         Boolean res = (Boolean) joinPoint.proceed();
         if (res){
             CACHE_CONTAINER.put(CACHE_DEPT_PROFIX + object.getId(),object);
@@ -74,7 +74,7 @@ public class CacheAspect {
             return res1;
         }else {
             log.info("未从缓存里面找到部门对象，从数据库中查询并放入缓存");
-            Dept res2 =(Dept) joinPoint.proceed();
+            Tenant res2 =(Tenant) joinPoint.proceed();
             CACHE_CONTAINER.put(CACHE_DEPT_PROFIX+res2.getId(),res2);
             return res2;
         }
@@ -88,12 +88,12 @@ public class CacheAspect {
     @Around(value = POINTCUT_DEPT_UPDATE)
     public Object cacheDeptUpdate(ProceedingJoinPoint joinPoint) throws Throwable {
         //取出第一个参数
-        Dept deptVo = (Dept) joinPoint.getArgs()[0];
+        Tenant deptVo = (Tenant) joinPoint.getArgs()[0];
         Boolean isSuccess = (Boolean) joinPoint.proceed();
         if (isSuccess){
-            Dept dept =(Dept) CACHE_CONTAINER.get(CACHE_DEPT_PROFIX + deptVo.getId());
+            Tenant dept =(Tenant) CACHE_CONTAINER.get(CACHE_DEPT_PROFIX + deptVo.getId());
             if (null==dept){
-                dept=new Dept();
+                dept=new Tenant();
             }
             BeanUtils.copyProperties(deptVo,dept);
             log.info("部门对象缓存已更新"+CACHE_DEPT_PROFIX + deptVo.getId());

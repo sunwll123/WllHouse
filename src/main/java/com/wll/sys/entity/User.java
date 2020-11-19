@@ -28,7 +28,7 @@ import java.util.Date;
 @ToString
 public class User implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
@@ -45,15 +45,11 @@ public class User implements Serializable {
 
     private String remark;
 
-    private Integer deptid;
-
+    /**
+     * 入职时间
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date hiredate;
-
-    /**
-     * 上级领导id
-     */
-    private Integer mgr;
 
     /**
      * 是否可用，0不可用，1可用
@@ -81,16 +77,8 @@ public class User implements Serializable {
     private String salt;
 
     /**
-     * 领导名称
+     * 租户ID，0代表系统租户
      */
-    @TableField(exist = false)
-    private String leadername;
-
-    /**
-     * 部门名称
-     */
-    @TableField(exist = false)
-    private String deptname;
-
+    private Integer tenantId;
 
 }

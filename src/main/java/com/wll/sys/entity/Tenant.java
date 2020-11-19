@@ -1,6 +1,7 @@
 package com.wll.sys.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -13,7 +14,7 @@ import java.util.Date;
 
 /**
  * <p>
- * InnoDB free: 9216 kB
+ *  租户信息表
  * </p>
  *
  * @author wll
@@ -22,27 +23,33 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("sys_dept")
+@TableName("sys_tenant")
 @ToString
-public class Dept implements Serializable {
+public class Tenant implements Serializable {
 
     private static final long serialVersionUID=1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Integer pid;
-
-    private String name;
-
     /**
-     * 是否展开，0不展开，1展开
+     * 租户名称
      */
-    private Integer open;
+    @TableField("tenant_name")
+    private String tenantName;
+
 
     private String remark;
 
+    /**
+     * 租户地址
+     */
     private String address;
+
+    /**
+     * 租户联系电话
+     */
+    private String phone;
 
     /**
      * 是否可用，0不可用，1可用
@@ -54,6 +61,9 @@ public class Dept implements Serializable {
      */
     private Integer ordernum;
 
+    /**
+     * 创建日期
+     */
     private Date createtime;
 
 

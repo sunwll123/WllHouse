@@ -91,28 +91,12 @@ public class SystemController {
      * 跳转到部门管理
      * @return
      */
-    @RequestMapping("toDeptManager")
+    @RequestMapping("toTenantManager")
     public String toDeptManager(){
-        return "system/dept/deptManager";
+        return "system/tenant/tenantManager";
     }
 
-    /**
-     * 跳转到部门管理--left
-     * @return
-     */
-    @RequestMapping("toDeptLeft")
-    public String toDeptLeft(){
-        return "system/dept/deptLeft";
-    }
 
-    /**
-     * 跳转到部门管理--right
-     * @return
-     */
-    @RequestMapping("toDeptRight")
-    public String toDeptRight(){
-        return "system/dept/deptRight";
-    }
 
     /**
      * 跳转到菜单管理

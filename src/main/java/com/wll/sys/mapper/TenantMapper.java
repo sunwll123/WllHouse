@@ -1,6 +1,6 @@
 package com.wll.sys.mapper;
 
-import com.wll.sys.entity.Dept;
+import com.wll.sys.entity.Tenant;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author wll
  * @since 2020-11-11
  */
-public interface DeptMapper extends BaseMapper<Dept> {
+public interface TenantMapper extends BaseMapper<Tenant> {
 
 }
