@@ -51,10 +51,10 @@
 <form action="" method="post" id="searchFrm" lay-filter="searchFrm" class="layui-form">
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">所属租户</label>
+            <label class="layui-form-label">所属店铺</label>
             <div class="layui-input-inline">
                 <select name="tenantId" id="select_tenantId">
-                    <option value="0">请选择租户</option>
+                    <option value="0">请选择店铺</option>
                 </select>
             </div>
         </div>
@@ -119,10 +119,10 @@
     <form action="" method="post" class="layui-form" id="dataFrm" lay-filter="dataFrm">
         <div class="layui-form-item">
             <div class="layui-inline">
-                <label class="layui-form-label">所属租户</label>
+                <label class="layui-form-label">所属店铺</label>
                 <div class="layui-input-inline">
                     <select name="tenantId" id="tenantId" lay-filter="tenantId">
-                        <option value="0">请选择租户</option>
+                        <option value="0">请选择店铺</option>
                     </select>
                     <div class="mydiv" title="不可修改"
                          style="position:absolute;width:100%;height:100%;left:0px;top:0px;background:#fff;opacity:0;filter:alpha(opacity=0)"></div>
@@ -239,7 +239,7 @@
                 {field: 'id', title: 'ID', align: 'center', width: '50'},
                 {field: 'name', title: '用户名', align: 'center', width: '130'},
                 {field: 'loginname', title: '登陆名称', align: 'center', width: '130'},
-                {field: 'tenantName', title: '所属租户', align: 'center', width: '130'},
+                {field: 'tenantName', title: '所属店铺', align: 'center', width: '130'},
                 {field: 'tenantId', hide: 'true'},
                 {field: 'remark', title: '用户备注', align: 'center', width: '120'},
                 {
@@ -277,7 +277,7 @@
         $.get("/tenant/loadAllTenantForSelect", function (res) {
             var data = res.data;
             var dom = $("#select_tenantId");
-            var html = '<option value="0">请选择租户</option>';
+            var html = '<option value="0">请选择店铺</option>';
             $.each(data, function (index, item) {
                 html += '<option value="' + item.id + '">' + item.tenantName + '</option>';
             })
@@ -334,13 +334,13 @@
 
         //初始化添加和修改页面的下拉列表
         function initTenantSelect(tenantId) {
-            //重置租户的下拉列表
+            //重置店铺的下拉列表
             var dom = $("#tenantId");
             dom.html("");
             $.get("/tenant/loadAllTenantForSelect", function (res) {
                 var data = res.data;
                 var dom = $("#tenantId");
-                var html = '<option value="0">请选择租户</option>';
+                var html = '<option value="0">请选择店铺</option>';
                 $.each(data, function (index, item) {
                     html += '<option value="' + item.id + '">' + item.tenantName + '</option>';
                 });
@@ -363,7 +363,7 @@
                 title: '添加用户',
                 success: function () {
                     $("#dataFrm")[0].reset();
-                    //初始化租户的下拉列表
+                    //初始化店铺的下拉列表
                     initTenantSelect();
                     //使该div隐藏
                     $(".mydiv").hide();

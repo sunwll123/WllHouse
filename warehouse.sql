@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-20 08:18:51
+Date: 2020-11-20 20:42:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -240,7 +240,7 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=392 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=404 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -623,6 +623,18 @@ INSERT INTO `sys_loginfo` VALUES ('388', 'wlp-wlp', '192.168.30.1', '2020-11-20 
 INSERT INTO `sys_loginfo` VALUES ('389', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:16:46');
 INSERT INTO `sys_loginfo` VALUES ('390', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:17:12');
 INSERT INTO `sys_loginfo` VALUES ('391', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:18:00');
+INSERT INTO `sys_loginfo` VALUES ('392', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:21:09');
+INSERT INTO `sys_loginfo` VALUES ('393', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:24:24');
+INSERT INTO `sys_loginfo` VALUES ('394', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:25:17');
+INSERT INTO `sys_loginfo` VALUES ('395', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:00:32');
+INSERT INTO `sys_loginfo` VALUES ('396', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:09:25');
+INSERT INTO `sys_loginfo` VALUES ('397', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:13:50');
+INSERT INTO `sys_loginfo` VALUES ('398', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:14:46');
+INSERT INTO `sys_loginfo` VALUES ('399', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:15:10');
+INSERT INTO `sys_loginfo` VALUES ('400', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:16:12');
+INSERT INTO `sys_loginfo` VALUES ('401', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:17:09');
+INSERT INTO `sys_loginfo` VALUES ('402', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:37:40');
+INSERT INTO `sys_loginfo` VALUES ('403', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:38:38');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -661,7 +673,7 @@ CREATE TABLE `sys_permission` (
   `ordernum` int(11) DEFAULT NULL,
   `available` int(11) DEFAULT NULL COMMENT '状态【0不可用1可用】',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_permission
@@ -679,7 +691,7 @@ INSERT INTO `sys_permission` VALUES ('10', '3', 'menu', '商品进货', null, '&
 INSERT INTO `sys_permission` VALUES ('11', '3', 'menu', '商品退货查询', null, '&#xe65a;', '/bus/toOutportManager', '', '0', '11', '1');
 INSERT INTO `sys_permission` VALUES ('12', '4', 'menu', '商品销售', null, '&#xe65b;', '/bus/toSalesManager', '', '0', '12', '1');
 INSERT INTO `sys_permission` VALUES ('13', '4', 'menu', '销售退货查询', null, '&#xe770;', '/bus/toSalesbackManager', '', '0', '13', '1');
-INSERT INTO `sys_permission` VALUES ('14', '5', 'menu', '租户管理', null, '&#xe770;', '/sys/toTenantManager', '', '0', '14', '1');
+INSERT INTO `sys_permission` VALUES ('14', '5', 'menu', '店铺管理', null, '&#xe770;', '/sys/toTenantManager', '', '0', '14', '1');
 INSERT INTO `sys_permission` VALUES ('15', '5', 'menu', '菜单管理', null, '&#xe663;', '/sys/toMenuManager', '', '0', '15', '1');
 INSERT INTO `sys_permission` VALUES ('16', '5', 'menu', '权限管理', '', '&#xe857;', '/sys/toPermissionManager', '', '0', '16', '1');
 INSERT INTO `sys_permission` VALUES ('17', '5', 'menu', '角色管理', '', '&#xe650;', '/sys/toRoleManager', '', '0', '17', '1');
@@ -687,9 +699,9 @@ INSERT INTO `sys_permission` VALUES ('18', '5', 'menu', '用户管理', '', '&#x
 INSERT INTO `sys_permission` VALUES ('21', '6', 'menu', '登陆日志', null, '&#xe675;', '/sys/toLoginfoManager', '', '0', '21', '1');
 INSERT INTO `sys_permission` VALUES ('22', '6', 'menu', '系统公告', null, '&#xe756;', '/sys/toNoticeManager', null, '0', '22', '1');
 INSERT INTO `sys_permission` VALUES ('23', '6', 'menu', '图标管理', null, '&#xe670;', '../resources/page/icon.html', null, '0', '23', '1');
-INSERT INTO `sys_permission` VALUES ('30', '14', 'permission', '添加部门', 'dept:create', '', null, null, '0', '24', '1');
-INSERT INTO `sys_permission` VALUES ('31', '14', 'permission', '修改部门', 'dept:update', '', null, null, '0', '26', '1');
-INSERT INTO `sys_permission` VALUES ('32', '14', 'permission', '删除部门', 'dept:delete', '', null, null, '0', '27', '1');
+INSERT INTO `sys_permission` VALUES ('30', '14', 'permission', '添加店铺', 'tenant:create', '', null, null, '0', '24', '1');
+INSERT INTO `sys_permission` VALUES ('31', '14', 'permission', '修改店铺', 'tenant:update', '', null, null, '0', '26', '1');
+INSERT INTO `sys_permission` VALUES ('32', '14', 'permission', '删除店铺', 'tenant:delete', '', null, null, '0', '27', '1');
 INSERT INTO `sys_permission` VALUES ('34', '15', 'permission', '添加菜单', 'menu:create', '', '', '', '0', '29', '1');
 INSERT INTO `sys_permission` VALUES ('35', '15', 'permission', '修改菜单', 'menu:update', '', null, null, '0', '30', '1');
 INSERT INTO `sys_permission` VALUES ('36', '15', 'permission', '删除菜单', 'menu:delete', '', null, null, '0', '31', '1');
@@ -705,7 +717,7 @@ INSERT INTO `sys_permission` VALUES ('48', '18', 'permission', '修改用户', '
 INSERT INTO `sys_permission` VALUES ('49', '18', 'permission', '删除用户', 'user:delete', '', null, null, '0', '44', '1');
 INSERT INTO `sys_permission` VALUES ('51', '18', 'permission', '用户分配角色', 'user:selectRole', '', null, null, '0', '46', '1');
 INSERT INTO `sys_permission` VALUES ('52', '18', 'permission', '重置密码', 'user:resetPwd', null, null, null, '0', '47', '1');
-INSERT INTO `sys_permission` VALUES ('53', '14', 'permission', '部门查询', 'dept:view', null, null, null, '0', '48', '1');
+INSERT INTO `sys_permission` VALUES ('53', '14', 'permission', '店铺查询', 'tenant:view', null, null, null, '0', '48', '1');
 INSERT INTO `sys_permission` VALUES ('54', '15', 'permission', '菜单查询', 'menu:view', null, null, null, '0', '49', '1');
 INSERT INTO `sys_permission` VALUES ('55', '16', 'permission', '权限查询', 'permission:view', null, null, null, '0', '50', '1');
 INSERT INTO `sys_permission` VALUES ('56', '17', 'permission', '角色查询', 'role:view', null, null, null, '0', '51', '1');
@@ -737,6 +749,19 @@ INSERT INTO `sys_permission` VALUES ('123', '122', 'permission', '同步缓存',
 INSERT INTO `sys_permission` VALUES ('124', '122', 'permission', '清空缓存', 'cache:removeAllCache', null, null, null, '0', '90', '1');
 INSERT INTO `sys_permission` VALUES ('126', '1', 'menu', '物流管理', null, '&#xe715;', '', '', '0', '91', '1');
 INSERT INTO `sys_permission` VALUES ('127', '126', 'menu', '物流基础信息管理', null, '&#xe716;', '/bus/toLogisticsBase', '', '1', '92', '1');
+INSERT INTO `sys_permission` VALUES ('128', '127', 'permission', '物流添加', 'logisticsBase:create', null, null, null, '0', '93', '1');
+INSERT INTO `sys_permission` VALUES ('129', '127', 'permission', '物流编辑', 'logisticsBase:update', null, null, null, '0', '94', '1');
+INSERT INTO `sys_permission` VALUES ('130', '127', 'permission', '物流删除', 'logisticsBase:delete', null, null, null, '0', '95', '1');
+INSERT INTO `sys_permission` VALUES ('131', '10', 'permission', '添加进货', 'inport:create', null, null, null, '0', '96', '1');
+INSERT INTO `sys_permission` VALUES ('132', '10', 'permission', '编辑进货', 'inport:update', null, null, null, '0', '97', '1');
+INSERT INTO `sys_permission` VALUES ('133', '10', 'permission', '删除进货信息', 'inport:delete', null, null, null, '0', '98', '1');
+INSERT INTO `sys_permission` VALUES ('134', '10', 'permission', '退货', 'inport:back', null, null, null, '0', '99', '1');
+INSERT INTO `sys_permission` VALUES ('135', '11', 'permission', '删除退货信息', 'outport:delete', null, null, null, '0', '100', '1');
+INSERT INTO `sys_permission` VALUES ('136', '13', 'permission', '删除客户退货信息', 'salesback:delete', null, null, null, '0', '101', '1');
+INSERT INTO `sys_permission` VALUES ('137', '12', 'permission', '添加销售信息', 'sales:create', null, null, null, '0', '102', '1');
+INSERT INTO `sys_permission` VALUES ('138', '12', 'permission', '编辑销售信息', 'sales:update', null, null, null, '0', '103', '1');
+INSERT INTO `sys_permission` VALUES ('139', '12', 'permission', '删除销售信息', 'sales:delete', null, null, null, '0', '104', '1');
+INSERT INTO `sys_permission` VALUES ('140', '12', 'permission', '退货', 'sales:back', null, null, null, '0', '105', '1');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -755,7 +780,7 @@ CREATE TABLE `sys_role` (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '超级管理员', '拥有所有菜单权限', '1', '2019-04-10 14:06:32');
-INSERT INTO `sys_role` VALUES ('12', '租户管理员', '用来管理租户信息', '1', '2020-11-19 17:46:22');
+INSERT INTO `sys_role` VALUES ('12', '店铺管理员', '用来管理店铺信息', '1', '2020-11-19 17:46:22');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -865,6 +890,19 @@ INSERT INTO `sys_role_permission` VALUES ('1', '118');
 INSERT INTO `sys_role_permission` VALUES ('12', '118');
 INSERT INTO `sys_role_permission` VALUES ('12', '126');
 INSERT INTO `sys_role_permission` VALUES ('12', '127');
+INSERT INTO `sys_role_permission` VALUES ('12', '128');
+INSERT INTO `sys_role_permission` VALUES ('12', '129');
+INSERT INTO `sys_role_permission` VALUES ('12', '130');
+INSERT INTO `sys_role_permission` VALUES ('12', '131');
+INSERT INTO `sys_role_permission` VALUES ('12', '132');
+INSERT INTO `sys_role_permission` VALUES ('12', '133');
+INSERT INTO `sys_role_permission` VALUES ('12', '134');
+INSERT INTO `sys_role_permission` VALUES ('12', '135');
+INSERT INTO `sys_role_permission` VALUES ('12', '136');
+INSERT INTO `sys_role_permission` VALUES ('12', '137');
+INSERT INTO `sys_role_permission` VALUES ('12', '138');
+INSERT INTO `sys_role_permission` VALUES ('12', '139');
+INSERT INTO `sys_role_permission` VALUES ('12', '140');
 
 -- ----------------------------
 -- Table structure for sys_tenant
