@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-20 01:39:50
+Date: 2020-11-20 08:18:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -240,7 +240,7 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=383 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=392 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -614,6 +614,15 @@ INSERT INTO `sys_loginfo` VALUES ('379', '冰镇土笋冻-wll', '192.168.30.1', 
 INSERT INTO `sys_loginfo` VALUES ('380', 'wlp-wlp', '192.168.30.1', '2020-11-19 17:25:17');
 INSERT INTO `sys_loginfo` VALUES ('381', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:35:08');
 INSERT INTO `sys_loginfo` VALUES ('382', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:39:20');
+INSERT INTO `sys_loginfo` VALUES ('383', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 23:49:10');
+INSERT INTO `sys_loginfo` VALUES ('384', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:13:44');
+INSERT INTO `sys_loginfo` VALUES ('385', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:14:35');
+INSERT INTO `sys_loginfo` VALUES ('386', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:14:47');
+INSERT INTO `sys_loginfo` VALUES ('387', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:15:07');
+INSERT INTO `sys_loginfo` VALUES ('388', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:15:50');
+INSERT INTO `sys_loginfo` VALUES ('389', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:16:46');
+INSERT INTO `sys_loginfo` VALUES ('390', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:17:12');
+INSERT INTO `sys_loginfo` VALUES ('391', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:18:00');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -740,12 +749,13 @@ CREATE TABLE `sys_role` (
   `available` int(11) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '超级管理员', '拥有所有菜单权限', '1', '2019-04-10 14:06:32');
+INSERT INTO `sys_role` VALUES ('12', '租户管理员', '用来管理租户信息', '1', '2020-11-19 17:46:22');
 
 -- ----------------------------
 -- Table structure for sys_role_permission
@@ -765,18 +775,29 @@ CREATE TABLE `sys_role_permission` (
 -- Records of sys_role_permission
 -- ----------------------------
 INSERT INTO `sys_role_permission` VALUES ('1', '1');
+INSERT INTO `sys_role_permission` VALUES ('12', '1');
 INSERT INTO `sys_role_permission` VALUES ('1', '2');
+INSERT INTO `sys_role_permission` VALUES ('12', '2');
 INSERT INTO `sys_role_permission` VALUES ('1', '3');
+INSERT INTO `sys_role_permission` VALUES ('12', '3');
 INSERT INTO `sys_role_permission` VALUES ('1', '4');
+INSERT INTO `sys_role_permission` VALUES ('12', '4');
 INSERT INTO `sys_role_permission` VALUES ('1', '5');
 INSERT INTO `sys_role_permission` VALUES ('1', '6');
 INSERT INTO `sys_role_permission` VALUES ('1', '7');
+INSERT INTO `sys_role_permission` VALUES ('12', '7');
 INSERT INTO `sys_role_permission` VALUES ('1', '8');
+INSERT INTO `sys_role_permission` VALUES ('12', '8');
 INSERT INTO `sys_role_permission` VALUES ('1', '9');
+INSERT INTO `sys_role_permission` VALUES ('12', '9');
 INSERT INTO `sys_role_permission` VALUES ('1', '10');
+INSERT INTO `sys_role_permission` VALUES ('12', '10');
 INSERT INTO `sys_role_permission` VALUES ('1', '11');
+INSERT INTO `sys_role_permission` VALUES ('12', '11');
 INSERT INTO `sys_role_permission` VALUES ('1', '12');
+INSERT INTO `sys_role_permission` VALUES ('12', '12');
 INSERT INTO `sys_role_permission` VALUES ('1', '13');
+INSERT INTO `sys_role_permission` VALUES ('12', '13');
 INSERT INTO `sys_role_permission` VALUES ('1', '14');
 INSERT INTO `sys_role_permission` VALUES ('1', '15');
 INSERT INTO `sys_role_permission` VALUES ('1', '16');
@@ -809,9 +830,13 @@ INSERT INTO `sys_role_permission` VALUES ('1', '55');
 INSERT INTO `sys_role_permission` VALUES ('1', '56');
 INSERT INTO `sys_role_permission` VALUES ('1', '57');
 INSERT INTO `sys_role_permission` VALUES ('1', '68');
+INSERT INTO `sys_role_permission` VALUES ('12', '68');
 INSERT INTO `sys_role_permission` VALUES ('1', '69');
+INSERT INTO `sys_role_permission` VALUES ('12', '69');
 INSERT INTO `sys_role_permission` VALUES ('1', '70');
+INSERT INTO `sys_role_permission` VALUES ('12', '70');
 INSERT INTO `sys_role_permission` VALUES ('1', '71');
+INSERT INTO `sys_role_permission` VALUES ('12', '71');
 INSERT INTO `sys_role_permission` VALUES ('1', '73');
 INSERT INTO `sys_role_permission` VALUES ('1', '74');
 INSERT INTO `sys_role_permission` VALUES ('1', '75');
@@ -820,15 +845,26 @@ INSERT INTO `sys_role_permission` VALUES ('1', '77');
 INSERT INTO `sys_role_permission` VALUES ('1', '78');
 INSERT INTO `sys_role_permission` VALUES ('1', '79');
 INSERT INTO `sys_role_permission` VALUES ('1', '81');
+INSERT INTO `sys_role_permission` VALUES ('12', '81');
 INSERT INTO `sys_role_permission` VALUES ('1', '82');
+INSERT INTO `sys_role_permission` VALUES ('12', '82');
 INSERT INTO `sys_role_permission` VALUES ('1', '83');
+INSERT INTO `sys_role_permission` VALUES ('12', '83');
 INSERT INTO `sys_role_permission` VALUES ('1', '84');
+INSERT INTO `sys_role_permission` VALUES ('12', '84');
 INSERT INTO `sys_role_permission` VALUES ('1', '86');
 INSERT INTO `sys_role_permission` VALUES ('1', '91');
+INSERT INTO `sys_role_permission` VALUES ('12', '91');
 INSERT INTO `sys_role_permission` VALUES ('1', '92');
+INSERT INTO `sys_role_permission` VALUES ('12', '92');
 INSERT INTO `sys_role_permission` VALUES ('1', '116');
+INSERT INTO `sys_role_permission` VALUES ('12', '116');
 INSERT INTO `sys_role_permission` VALUES ('1', '117');
+INSERT INTO `sys_role_permission` VALUES ('12', '117');
 INSERT INTO `sys_role_permission` VALUES ('1', '118');
+INSERT INTO `sys_role_permission` VALUES ('12', '118');
+INSERT INTO `sys_role_permission` VALUES ('12', '126');
+INSERT INTO `sys_role_permission` VALUES ('12', '127');
 
 -- ----------------------------
 -- Table structure for sys_tenant
@@ -844,11 +880,12 @@ CREATE TABLE `sys_tenant` (
   `createtime` datetime DEFAULT NULL,
   `phone` varchar(56) DEFAULT NULL COMMENT '联系电话',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
+INSERT INTO `sys_tenant` VALUES ('21', '好运来家纺', '租户管理员', '郑州', '1', '1', '2020-11-19 17:43:38', '12345678911');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -872,13 +909,14 @@ CREATE TABLE `sys_user` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `sys_user_loginname` (`loginname`) USING BTREE COMMENT '登陆名称唯一',
   KEY `FK_sys_dept_sys_user` (`tenant_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '超级管理员', 'system', '532ac00e86893901af5f0be6b704dbc7', '银河系', '1', '超级管理员', '0', '2018-06-25 11:06:34', '1', '1', '0', '2020-02-24/8258FCECC0D64A1DB3B457E7D51D6AB5.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
 INSERT INTO `sys_user` VALUES ('2', '冰镇土笋冻', 'wll', '532ac00e86893901af5f0be6b704dbc7', '郑州', '1', '超级管理员', '0', '2019-11-23 20:52:16', '1', '2', '0', '2020-03-08/0F8C9E01C1DF4A60BB0E2747F67D03BF.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
+INSERT INTO `sys_user` VALUES ('23', 'wlp', 'wlp', 'd590d20435ed2a7ff7fbff4ebbd329fd', '郑州', '1', '租户管理员', '21', '2020-11-19 17:44:20', '1', '1', '1', '/images/defaultUserTitle.jpg', '982D52A4C42E428BAB9FB911E85A4568');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -897,3 +935,4 @@ CREATE TABLE `sys_user_role` (
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('1', '1');
+INSERT INTO `sys_user_role` VALUES ('23', '12');

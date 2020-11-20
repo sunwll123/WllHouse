@@ -2,6 +2,7 @@ package com.wll.sys.controller;
 
 
 import cn.hutool.core.util.IdUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -232,8 +233,13 @@ public class UserController {
     @RequestMapping("initRoleByUserId")
     public DataGridView initRoleByUserId(Integer id) {
         //1.查询所有可用的角色
-        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
+        LambdaQueryWrapper<Role> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Role::getAvailable, Constast.AVAILABLE_TRUE);
+        User user = (User) WebUtils.getSession().getAttribute("user");
+        if (user.getType() != 0){
+            // 普通租户不可以查询超级管理员角色
+            queryWrapper.notIn(Role::getId,1);
+        }
         List<Map<String, Object>> listMaps = roleService.listMaps(queryWrapper);
         //2.查询当前用户拥有的角色ID集合
         List<Integer> currentUserRoleIds = roleService.queryUserRoleIdsByUid(id);
