@@ -1,7 +1,9 @@
 package com.wll.bus.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wll.bus.entity.Goods;
+import com.wll.bus.vo.GoodsVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -56,5 +58,15 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     /**
      * 加载所有库存预警商品
      */
-    List<Goods> loadAllWarning();
+    List<GoodsVo> loadAllWarning(@Param("tenantId") Integer tenantId);
+
+    /**
+     *
+     * @param goodsVo 查询商品列表信息
+     * @return
+     */
+    IPage<GoodsVo> loadAllGoodsByCondition(@Param("page") IPage<GoodsVo> page,@Param("goodsVo") GoodsVo goodsVo);
+
+    List<GoodsVo> selectAllGoodsByCondition(@Param("goodsVo") GoodsVo goodsVo);
+
 }

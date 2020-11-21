@@ -2,7 +2,10 @@ package com.wll.bus.mapper;
 
 import com.wll.bus.entity.Provider;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wll.bus.vo.GoodsVo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>

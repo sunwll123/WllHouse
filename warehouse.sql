@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-21 10:27:52
+Date: 2020-11-21 12:49:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -57,21 +57,23 @@ CREATE TABLE `bus_goods` (
   `dangernum` int(11) DEFAULT NULL,
   `goodsimg` varchar(255) DEFAULT NULL,
   `available` int(11) DEFAULT NULL,
+  `tenant_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `FK_sq0btr2v2lq8gt8b4gb8tlk0i` (`providerid`) USING BTREE,
   CONSTRAINT `bus_goods_ibfk_1` FOREIGN KEY (`providerid`) REFERENCES `bus_provider` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_goods
 -- ----------------------------
-INSERT INTO `bus_goods` VALUES ('1', '娃哈哈', '3', '武汉', '120ML', '瓶', 'PH12345', 'PZ1234', '小孩子都爱的', '2', '463', '10', '2020-02-24/99F329D96E06449E9A5D613B1D3FA7DD.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('2', '旺旺雪饼[小包]', '1', '仙桃', '包', '袋', 'PH12312312', 'PZ12312', '好吃不上火', '4', '1090', '10', '2020-01-21/625C047E6A934D9FA5C611BB7D93CD8F.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('3', '旺旺大礼包', '1', '仙桃', '盒', '盒', '11', '11', '111', '28', '1021', '100', '2020-01-21/8F743D2038D747878B02C0E2183823A6.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('4', '娃哈哈', '3', '武汉', '200ML', '瓶', '11', '111', '12321', '3', '760', '10', '2020-01-21/B1B4C7D489EB43E5B662E8E92A6A5180.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('5', '娃哈哈', '3', '武汉', '300ML', '瓶', '1234', '12321', '22221111', '3', '1000', '100', '2020-01-21/BAF8B804591942F2AEF43E6BE25934DD.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('6', '纯牛奶', '4', '内蒙古', '24瓶一箱', '瓶', 'SD13156146', '321651613', '牛奶', '55', '100', '20', '2020-01-21/F0BC1EBC2BFA4497BDF8B9254BA59511.jpg', '1');
-INSERT INTO `bus_goods` VALUES ('18', '八宝粥', '2', '广州', '箱', '15', 'DFS234341231', 'DF123124324', '粥', '4', '490', '100', '2020-03-07/5D1B185D310245A7AD7EFF51393C8432.jpg', '1');
+INSERT INTO `bus_goods` VALUES ('1', '娃哈哈', '3', '武汉', '120ML', '瓶', 'PH12345', 'PZ1234', '小孩子都爱的', '2', '463', '10', '2020-02-24/99F329D96E06449E9A5D613B1D3FA7DD.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('2', '旺旺雪饼[小包]', '1', '仙桃', '包', '袋', 'PH12312312', 'PZ12312', '好吃不上火', '4', '1090', '10', '2020-01-21/625C047E6A934D9FA5C611BB7D93CD8F.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('3', '旺旺大礼包', '1', '仙桃', '盒', '盒', '11', '11', '111', '28', '1021', '100', '2020-01-21/8F743D2038D747878B02C0E2183823A6.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('4', '娃哈哈', '3', '武汉', '200ML', '瓶', '11', '111', '12321', '3', '760', '10', '2020-01-21/B1B4C7D489EB43E5B662E8E92A6A5180.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('5', '娃哈哈', '3', '武汉', '300ML', '瓶', '1234', '12321', '22221111', '3', '1000', '100', '2020-01-21/BAF8B804591942F2AEF43E6BE25934DD.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('6', '纯牛奶', '4', '内蒙古', '24瓶一箱', '瓶', 'SD13156146', '321651613', '牛奶', '55', '100', '20', '2020-01-21/F0BC1EBC2BFA4497BDF8B9254BA59511.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('18', '八宝粥', '2', '广州', '箱', '15', 'DFS234341231', 'DF123124324', '粥', '4', '490', '100', '2020-03-07/5D1B185D310245A7AD7EFF51393C8432.jpg', '1', '0');
+INSERT INTO `bus_goods` VALUES ('19', '宾利麻', '13', '浙江', '64米 x 1匹', '袋子', 'SC123456', 'PZ123456', '窗帘用品', '2560', '1', '1', '/images/noDefaultImage.jpg', '1', '1');
 
 -- ----------------------------
 -- Table structure for bus_inport
@@ -199,13 +201,14 @@ CREATE TABLE `bus_sales` (
   `saleprice` decimal(10,2) DEFAULT NULL,
   `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_sales
 -- ----------------------------
 INSERT INTO `bus_sales` VALUES ('1', '4', '支付宝', '2020-01-21 03:04:52', '落亦-', '15', '士大夫士大夫', '60.00', '1');
 INSERT INTO `bus_sales` VALUES ('8', '4', '支付宝', '2020-11-17 05:33:12', '超级管理员', '10', '', '50.00', '18');
+INSERT INTO `bus_sales` VALUES ('9', '2', '支付宝', '2020-11-21 04:47:29', 'wlp', '5', 'fd', '10300.00', '19');
 
 -- ----------------------------
 -- Table structure for bus_salesback
@@ -239,7 +242,7 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=411 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=419 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -254,6 +257,14 @@ INSERT INTO `sys_loginfo` VALUES ('407', 'wlp-wlp', '192.168.30.1', '2020-11-20 
 INSERT INTO `sys_loginfo` VALUES ('408', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-20 14:29:31');
 INSERT INTO `sys_loginfo` VALUES ('409', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-20 14:35:48');
 INSERT INTO `sys_loginfo` VALUES ('410', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 02:26:44');
+INSERT INTO `sys_loginfo` VALUES ('411', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 02:29:57');
+INSERT INTO `sys_loginfo` VALUES ('412', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 02:33:28');
+INSERT INTO `sys_loginfo` VALUES ('413', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:25:58');
+INSERT INTO `sys_loginfo` VALUES ('414', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:34:39');
+INSERT INTO `sys_loginfo` VALUES ('415', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:36:18');
+INSERT INTO `sys_loginfo` VALUES ('416', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:39:42');
+INSERT INTO `sys_loginfo` VALUES ('417', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:40:49');
+INSERT INTO `sys_loginfo` VALUES ('418', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:43:07');
 
 -- ----------------------------
 -- Table structure for sys_notice

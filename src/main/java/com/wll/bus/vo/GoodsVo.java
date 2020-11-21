@@ -1,5 +1,6 @@
 package com.wll.bus.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.wll.bus.entity.Goods;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,5 +15,11 @@ public class GoodsVo extends Goods {
 
     private Integer page=1;
     private Integer limit=10;
+
+    /**
+     *
+     */
+    @TableField(exist = false)
+    private String providername;
 
 }

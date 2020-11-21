@@ -33,8 +33,117 @@
     </delete>
 
     <!--查询所有库存预警商品-->
-    <select id="loadAllWarning" resultType="com.wll.bus.entity.Goods">
-        select * from bus_goods where dangernum > number
+    <select id="loadAllWarning" resultType="com.wll.bus.vo.GoodsVo">
+        SELECT
+        bp.providername as "providername",
+        bg.providerid as "providerid",
+        bg.id as id,
+        bg.available as "available",
+        bg.dangernum as "dangernum",
+        bg.number as "number",
+        bg.description as "description",
+        bg.goodsname as "goodsname",
+        bg.price as "price",
+        bg.goodsimg as "goodsimg",
+        bg.goodspackage as "goodspackage",
+        bg.produceplace as "produceplace",
+        bg.productcode as "productcode",
+        bg.promitcode as "promitcode",
+        bg.size as size,
+        bg.tenant_id as "tenantId"
+        FROM bus_goods bg INNER JOIN bus_provider bp ON bp.id = bg.providerid
+        where <![CDATA[ bg.number <= bg.dangernum ]]> and bg.available = 1
+        <if test="tenantId != 0 ">
+            and bg.tenant_id = #{tenantId}
+        </if>
+    </select>
+
+    <select id="loadAllGoodsByCondition" resultType="com.wll.bus.vo.GoodsVo">
+        SELECT
+        bp.providername as "providername",
+        bg.providerid as "providerid",
+        bg.id as id,
+        bg.available as "available",
+        bg.dangernum as "dangernum",
+        bg.number as "number",
+        bg.description as "description",
+        bg.goodsname as "goodsname",
+        bg.price as "price",
+        bg.goodsimg as "goodsimg",
+        bg.goodspackage as "goodspackage",
+        bg.produceplace as "produceplace",
+        bg.productcode as "productcode",
+        bg.promitcode as "promitcode",
+        bg.size as size,
+        bg.tenant_id as "tenantId"
+        FROM bus_goods bg INNER JOIN bus_provider bp ON bp.id = bg.providerid
+        where bg.available = 1
+        <if test="goodsVo.providerid != null and goodsVo.providerid != 0 ">
+            and bg.providerid = #{goodsVo.providerid}
+        </if>
+        <if test="goodsVo.goodsname != null ">
+            and bg.goodsname like concat(concat("%",#{goodsVo.goodsname},"%"))
+        </if>
+        <if test="goodsVo.tenantId != null and goodsVo.tenantId != 0  ">
+            and bg.tenant_id = #{goodsVo.tenantId}
+        </if>
+        <if test="goodsVo.productcode != null">
+            and bg.productcode like concat(concat("%",#{goodsVo.productcode},"%"))
+        </if>
+        <if test="goodsVo.promitcode != null">
+            and bg.promitcode like concat(concat("%",#{goodsVo.promitcode},"%"))
+        </if>
+        <if test="goodsVo.description != null">
+            and bg.description like concat(concat("%",#{goodsVo.description},"%"))
+        </if>
+        <if test="goodsVo.size != null">
+            and bg.size like concat(concat("%",#{goodsVo.size},"%"))
+        </if>
+        ORDER BY bg.goodsname
+    </select>
+
+    <select id="selectAllGoodsByCondition" resultType="com.wll.bus.vo.GoodsVo">
+        SELECT
+        bp.providername as "providername",
+        bg.providerid as "providerid",
+        bg.id as id,
+        bg.available as "available",
+        bg.dangernum as "dangernum",
+        bg.number as "number",
+        bg.description as "description",
+        bg.goodsname as "goodsname",
+        bg.price as "price",
+        bg.goodsimg as "goodsimg",
+        bg.goodspackage as "goodspackage",
+        bg.produceplace as "produceplace",
+        bg.productcode as "productcode",
+        bg.promitcode as "promitcode",
+        bg.size as size,
+        bg.tenant_id as "tenantId"
+        FROM bus_goods bg INNER JOIN bus_provider bp ON bp.id = bg.providerid
+        where bg.available = 1
+        <if test="goodsVo.providerid != null and goodsVo.providerid != 0">
+            and bg.providerid = #{goodsVo.providerid}
+        </if>
+        <if test="goodsVo.goodsname != null ">
+            and bg.goodsname like concat(concat("%",#{goodsVo.goodsname},"%"))
+        </if>
+        <if test="goodsVo.tenantId != null and goodsVo.tenantId != 0 ">
+            and bg.tenant_id = #{goodsVo.tenantId}
+        </if>
+        <if test="goodsVo.productcode != null">
+            and bg.productcode like concat(concat("%",#{goodsVo.productcode},"%"))
+        </if>
+        <if test="goodsVo.promitcode != null">
+            and bg.promitcode like concat(concat("%",#{goodsVo.promitcode},"%"))
+        </if>
+        <if test="goodsVo.description != null">
+            and bg.description like concat(concat("%",#{goodsVo.description},"%"))
+        </if>
+        <if test="goodsVo.size != null">
+            and bg.size like concat(concat("%",#{goodsVo.size},"%"))
+        </if>
+        ORDER BY bg.goodsname
     </select>
 
 

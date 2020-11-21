@@ -10,6 +10,7 @@ import com.wll.bus.entity.Provider;
 import com.wll.bus.mapper.GoodsMapper;
 import com.wll.bus.mapper.ProviderMapper;
 import com.wll.bus.service.IProviderService;
+import com.wll.bus.vo.GoodsVo;
 import com.wll.bus.vo.ProviderVo;
 import com.wll.sys.common.Constast;
 import com.wll.sys.common.DataGridView;
@@ -121,4 +122,6 @@ public class ProviderServiceImpl extends ServiceImpl<ProviderMapper, Provider> i
         List<Provider> list = baseMapper.selectList(queryWrapper);
         return new DataGridView(list);
     }
+
+
 }

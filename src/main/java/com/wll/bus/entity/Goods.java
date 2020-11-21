@@ -31,34 +31,74 @@ public class Goods implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    /**
+     * 商品名称
+     */
     private String goodsname;
-
+    /**
+     * 商品产地
+     */
     private String produceplace;
+
+    /**
+     * 产品规格
+     */
 
     private String size;
 
+    /**
+     * 包装
+     */
     private String goodspackage;
 
+    /**
+     * 生产批号
+     */
     private String productcode;
 
+    /**
+     * 批准文号
+     */
     private String promitcode;
-
+    /**
+     * 商品描述
+     */
     private String description;
 
+    /**
+     * 商品单价（对应规格）
+     */
     private Double price;
 
+    /**
+     * 库存量
+     */
     private Integer number;
 
+    /**
+     * 商品预警值
+     */
     private Integer dangernum;
 
+    /**
+     * 商品图片
+     */
     private String goodsimg;
 
+    /**
+     * 是否可用,是否下架该商品
+     */
     private Integer available;
 
+    /**
+     * 供应商ID
+     */
     private Integer providerid;
 
-    @TableField(exist = false)
-    private String providername;
+    /**
+     * 商铺（租户）ID，0代表系统租户
+     */
+    private Integer tenantId;
 
 
 }

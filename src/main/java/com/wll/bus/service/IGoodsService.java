@@ -2,6 +2,8 @@ package com.wll.bus.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wll.bus.entity.Goods;
+import com.wll.bus.vo.GoodsVo;
+import com.wll.sys.common.DataGridView;
 
 import java.util.List;
 
@@ -25,5 +27,9 @@ public interface IGoodsService extends IService<Goods> {
      * 加载所有的库存预警商品
      * @return
      */
-    List<Goods> loadAllWarning();
+    List<GoodsVo> loadAllWarning();
+
+    DataGridView loadAllGoods(GoodsVo goodsVo);
+
+    DataGridView loadAllGoodsList(GoodsVo goodsVo);
 }

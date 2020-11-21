@@ -17,12 +17,14 @@ public interface IProviderService extends IService<Provider> {
 
     /**
      * 根据供应商ID删除供应商
+     *
      * @param id
      */
     void deleteProviderById(Integer id);
 
     /**
-     *  加载所有供应商
+     * 加载所有供应商
+     *
      * @param providerVo
      * @return
      */
@@ -30,6 +32,7 @@ public interface IProviderService extends IService<Provider> {
 
     /**
      * 加载所有可用的供应商
+     *
      * @return
      */
     DataGridView loadAllProviderForSelect();

@@ -163,25 +163,25 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">包装</label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input input-radius" name="goodspackage" lay-verify="required" placeholder="请输入商品包装">
+                        <input type="text" class="layui-input input-radius" name="goodspackage" lay-verify="required" value="袋子">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">规格</label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input input-radius" name="size" lay-verify="required" placeholder="请输入商品规格">
+                        <input type="text" class="layui-input input-radius" name="size" lay-verify="required" value="米">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">生产批号</label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input input-radius" name="productcode" lay-verify="required" placeholder="请输入商品生产批号">
+                        <input type="text" class="layui-input input-radius" name="productcode" lay-verify="required" value="SC123456">
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">批准文号</label>
                     <div class="layui-input-inline">
-                        <input type="text" class="layui-input input-radius" name="promitcode" lay-verify="required" placeholder="请输入商品批准文号">
+                        <input type="text" class="layui-input input-radius" name="promitcode" lay-verify="required" value="PZ123456">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -254,13 +254,14 @@
                 {field: 'produceplace', title: '商品产地', align: 'center',width:'150'},
                 {field: 'description', title: '商品描述', align: 'center',width:'150'},
                 {field: 'price', title: '销售价格', align: 'center',width:'90'},
-                {field: 'number', title: '数量', align: 'center',width:'90'},
+                {field: 'number', title: '库存量', align: 'center',width:'90'},
                 {field: 'dangernum', title: '库存预警值', align: 'center',width:'100'},
                 {field: 'goodsimg', title: '商品图片', align: 'center',width:'150', templet:function(d){
                     return '<img width=40 height=40 src=/file/showImageByPath?path='+d.goodsimg+ ' />';
                 }},
                 {field: 'size', title: '规格', align: 'center',width:'120'},
                 {field: 'goodspackage', title: '包装', align: 'center',width:'120'},
+                {field: 'tenantId', hide: 'true'},
                 {field: 'productcode', title: '生产批号', align: 'center',width:'130'},
                 {field: 'promitcode', title: '批准文号', align: 'center',width:'130'},
                 {field: 'available', title: '是否可用', align: 'center',width:'100',templet:function (d) {
