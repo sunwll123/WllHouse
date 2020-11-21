@@ -126,7 +126,9 @@ public class GoodsController {
      */
     @RequestMapping("loadAllGoodsForSelect")
     public DataGridView loadAllGoodsForSelect() {
-        return goodsService.loadAllGoodsList(new GoodsVo());
+        GoodsVo goods = new GoodsVo();
+        goods.setAvailable(1);
+        return goodsService.loadAllGoodsList(goods);
     }
 
     /**
