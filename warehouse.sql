@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-21 12:49:14
+Date: 2020-11-21 14:42:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,14 +66,8 @@ CREATE TABLE `bus_goods` (
 -- ----------------------------
 -- Records of bus_goods
 -- ----------------------------
-INSERT INTO `bus_goods` VALUES ('1', '娃哈哈', '3', '武汉', '120ML', '瓶', 'PH12345', 'PZ1234', '小孩子都爱的', '2', '463', '10', '2020-02-24/99F329D96E06449E9A5D613B1D3FA7DD.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('2', '旺旺雪饼[小包]', '1', '仙桃', '包', '袋', 'PH12312312', 'PZ12312', '好吃不上火', '4', '1090', '10', '2020-01-21/625C047E6A934D9FA5C611BB7D93CD8F.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('3', '旺旺大礼包', '1', '仙桃', '盒', '盒', '11', '11', '111', '28', '1021', '100', '2020-01-21/8F743D2038D747878B02C0E2183823A6.jpg', '1', '0');
 INSERT INTO `bus_goods` VALUES ('4', '娃哈哈', '3', '武汉', '200ML', '瓶', '11', '111', '12321', '3', '760', '10', '2020-01-21/B1B4C7D489EB43E5B662E8E92A6A5180.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('5', '娃哈哈', '3', '武汉', '300ML', '瓶', '1234', '12321', '22221111', '3', '1000', '100', '2020-01-21/BAF8B804591942F2AEF43E6BE25934DD.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('6', '纯牛奶', '4', '内蒙古', '24瓶一箱', '瓶', 'SD13156146', '321651613', '牛奶', '55', '100', '20', '2020-01-21/F0BC1EBC2BFA4497BDF8B9254BA59511.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('18', '八宝粥', '2', '广州', '箱', '15', 'DFS234341231', 'DF123124324', '粥', '4', '490', '100', '2020-03-07/5D1B185D310245A7AD7EFF51393C8432.jpg', '1', '0');
-INSERT INTO `bus_goods` VALUES ('19', '宾利麻', '13', '浙江', '64米 x 1匹', '袋子', 'SC123456', 'PZ123456', '窗帘用品', '2560', '1', '1', '/images/noDefaultImage.jpg', '1', '1');
+INSERT INTO `bus_goods` VALUES ('18', '八宝粥', '2', '广州', '箱', '15', 'DFS234341231', 'DF123124324', '粥', '4', '500', '100', '2020-03-07/5D1B185D310245A7AD7EFF51393C8432.jpg', '0', '0');
 
 -- ----------------------------
 -- Table structure for bus_inport
@@ -94,21 +88,11 @@ CREATE TABLE `bus_inport` (
   KEY `bus_inport_ibfk_2` (`goodsid`) USING BTREE,
   CONSTRAINT `bus_inport_ibfk_1` FOREIGN KEY (`providerid`) REFERENCES `bus_provider` (`id`),
   CONSTRAINT `bus_inport_ibfk_2` FOREIGN KEY (`goodsid`) REFERENCES `bus_goods` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_inport
 -- ----------------------------
-INSERT INTO `bus_inport` VALUES ('1', '微信', '2018-05-07 00:00:00', '张三', '100', '备注', '3.5', '1', '1');
-INSERT INTO `bus_inport` VALUES ('2', '支付宝', '2018-05-07 00:00:00', '张三', '1000', '无', '2.5', '3', '3');
-INSERT INTO `bus_inport` VALUES ('3', '银联', '2018-05-07 00:00:00', '张三', '100', '1231', '111', '3', '3');
-INSERT INTO `bus_inport` VALUES ('4', '银联', '2018-05-07 00:00:00', '张三', '1000', '无', '2', '3', '1');
-INSERT INTO `bus_inport` VALUES ('5', '银联', '2018-05-07 00:00:00', '张三', '100', '无', '1', '3', '1');
-INSERT INTO `bus_inport` VALUES ('6', '银联', '2018-05-07 00:00:00', '张三', '100', '1231', '2.5', '1', '2');
-INSERT INTO `bus_inport` VALUES ('8', '支付宝', '2018-05-07 00:00:00', '张三', '100', '', '1', '3', '1');
-INSERT INTO `bus_inport` VALUES ('10', '支付宝', '2018-08-07 17:17:57', '超级管理员', '100', 'sadfasfdsa', '1.5', '3', '1');
-INSERT INTO `bus_inport` VALUES ('11', '支付宝', '2018-09-17 16:12:25', '超级管理员', '21', '21', '21', '1', '3');
-INSERT INTO `bus_inport` VALUES ('12', '微信', '2018-12-25 16:48:24', '超级管理员', '90', '123213213', '12321321', '3', '1');
 
 -- ----------------------------
 -- Table structure for bus_logistics_base
@@ -155,9 +139,6 @@ CREATE TABLE `bus_outport` (
 -- ----------------------------
 -- Records of bus_outport
 -- ----------------------------
-INSERT INTO `bus_outport` VALUES ('1', '3', '微信', '2019-08-16 08:19:50', '超级管理员', '12321321.00', '1', '', '1');
-INSERT INTO `bus_outport` VALUES ('2', '3', '微信', '2019-08-16 08:26:54', '超级管理员', '12321321.00', '11', '11', '1');
-INSERT INTO `bus_outport` VALUES ('7', '3', '微信', '2020-11-17 05:36:43', '超级管理员', '12321321.00', '10', '次品', '1');
 
 -- ----------------------------
 -- Table structure for bus_provider
@@ -201,14 +182,11 @@ CREATE TABLE `bus_sales` (
   `saleprice` decimal(10,2) DEFAULT NULL,
   `goodsid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_sales
 -- ----------------------------
-INSERT INTO `bus_sales` VALUES ('1', '4', '支付宝', '2020-01-21 03:04:52', '落亦-', '15', '士大夫士大夫', '60.00', '1');
-INSERT INTO `bus_sales` VALUES ('8', '4', '支付宝', '2020-11-17 05:33:12', '超级管理员', '10', '', '50.00', '18');
-INSERT INTO `bus_sales` VALUES ('9', '2', '支付宝', '2020-11-21 04:47:29', 'wlp', '5', 'fd', '10300.00', '19');
 
 -- ----------------------------
 -- Table structure for bus_salesback
@@ -230,7 +208,6 @@ CREATE TABLE `bus_salesback` (
 -- ----------------------------
 -- Records of bus_salesback
 -- ----------------------------
-INSERT INTO `bus_salesback` VALUES ('4', '4', '支付宝', '2020-03-07 07:45:12', '60.00', '落亦-', '5', 'sdf', '1');
 
 -- ----------------------------
 -- Table structure for sys_loginfo
@@ -242,7 +219,7 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=419 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=433 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
@@ -265,6 +242,20 @@ INSERT INTO `sys_loginfo` VALUES ('415', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-
 INSERT INTO `sys_loginfo` VALUES ('416', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:39:42');
 INSERT INTO `sys_loginfo` VALUES ('417', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:40:49');
 INSERT INTO `sys_loginfo` VALUES ('418', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 04:43:07');
+INSERT INTO `sys_loginfo` VALUES ('419', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 04:51:09');
+INSERT INTO `sys_loginfo` VALUES ('420', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 04:55:30');
+INSERT INTO `sys_loginfo` VALUES ('421', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 05:06:30');
+INSERT INTO `sys_loginfo` VALUES ('422', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 05:07:10');
+INSERT INTO `sys_loginfo` VALUES ('423', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 05:31:09');
+INSERT INTO `sys_loginfo` VALUES ('424', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 05:33:09');
+INSERT INTO `sys_loginfo` VALUES ('425', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 05:33:41');
+INSERT INTO `sys_loginfo` VALUES ('426', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 05:34:38');
+INSERT INTO `sys_loginfo` VALUES ('427', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 05:47:57');
+INSERT INTO `sys_loginfo` VALUES ('428', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 06:08:21');
+INSERT INTO `sys_loginfo` VALUES ('429', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 06:09:07');
+INSERT INTO `sys_loginfo` VALUES ('430', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 06:27:42');
+INSERT INTO `sys_loginfo` VALUES ('431', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 06:39:57');
+INSERT INTO `sys_loginfo` VALUES ('432', '冰镇土笋冻-wll', '0:0:0:0:0:0:0:1', '2020-11-21 06:41:22');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -282,8 +273,7 @@ CREATE TABLE `sys_notice` (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('1', '测试', '测试', '2020-03-08 03:53:03', '冰镇土笋冻');
-INSERT INTO `sys_notice` VALUES ('2', 'sadf', 'asdf', '2020-03-08 04:17:44', '冰镇土笋冻');
+INSERT INTO `sys_notice` VALUES ('2', '数据赋能', '尊敬的客户，欢迎来到数据赋能空间，我们将用数据为您的店铺进行赋能', '2020-03-08 04:17:44', '冰镇土笋冻');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -582,7 +572,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '超级管理员', 'system', '532ac00e86893901af5f0be6b704dbc7', '银河系', '1', '超级管理员', '0', '2018-06-25 11:06:34', '1', '1', '0', '2020-02-24/8258FCECC0D64A1DB3B457E7D51D6AB5.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
-INSERT INTO `sys_user` VALUES ('2', '冰镇土笋冻', 'wll', '532ac00e86893901af5f0be6b704dbc7', '郑州', '1', '超级管理员', '0', '2019-11-23 20:52:16', '1', '2', '0', '2020-03-08/0F8C9E01C1DF4A60BB0E2747F67D03BF.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
+INSERT INTO `sys_user` VALUES ('2', '冰镇土笋冻', 'wll', '532ac00e86893901af5f0be6b704dbc7', '郑州', '1', '超级管理员', '0', '2019-11-23 20:52:16', '1', '2', '0', '2020-11-21/B08D466422BB4B189A99DE4A1B3614B0.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
 INSERT INTO `sys_user` VALUES ('23', 'wlp', 'wlp', 'd590d20435ed2a7ff7fbff4ebbd329fd', '郑州', '1', '租户管理员', '1', '2020-11-19 17:44:20', '1', '1', '1', '/images/defaultUserTitle.jpg', '982D52A4C42E428BAB9FB911E85A4568');
 
 -- ----------------------------
