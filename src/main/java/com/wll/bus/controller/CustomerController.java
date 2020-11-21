@@ -1,23 +1,21 @@
 package com.wll.bus.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.wll.bus.entity.Customer;
 import com.wll.bus.service.ICustomerService;
 import com.wll.bus.vo.CustomerVo;
-import com.wll.sys.common.Constast;
 import com.wll.sys.common.DataGridView;
 import com.wll.sys.common.ResultObj;
+import com.wll.sys.common.WebUtils;
+import com.wll.sys.entity.User;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>
@@ -29,6 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/customer")
+@Log4j2
 public class CustomerController {
 
     @Autowired
@@ -54,10 +53,12 @@ public class CustomerController {
     @RequestMapping("addCustomer")
     public ResultObj addCustomer(CustomerVo customerVo){
         try {
+            User user = (User) WebUtils.getSession().getAttribute("user");
+            customerVo.setTenantId(user.getTenantId());
             customerService.save(customerVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("添加｛｝客户失败",customerVo.getCustomername(),e);
             return ResultObj.ADD_ERROR;
         }
     }
@@ -73,7 +74,7 @@ public class CustomerController {
             customerService.updateById(customerVo);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("编辑｛｝客户失败",customerVo.getCustomername(),e);
             return ResultObj.UPDATE_ERROR;
         }
     }
@@ -91,22 +92,19 @@ public class CustomerController {
             customerService.deleteCustomerById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("删除｛｝客户失败",id,e);
             return ResultObj.DELETE_ERROR;
         }
     }
 
 
     /**
-     * 加载所有客户的下拉列表
+     * 加载当前店铺所有客户的下拉列表
      * @return
      */
     @RequestMapping("loadAllCustomerForSelect")
     public DataGridView loadAllCustomerForSelect(){
-        QueryWrapper<Customer> queryWrapper = new QueryWrapper<Customer>();
-        queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
-        List<Customer> list = customerService.list(queryWrapper);
-        return new DataGridView(list);
+        return customerService.loadAllCustomerForSelect();
     }
 
 }

@@ -56,5 +56,10 @@ public class Customer implements Serializable {
      */
     private Integer available;
 
+    /**
+     * 商铺（租户）ID，0代表系统租户
+     */
+    private Integer tenantId;
+
 
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50732
 File Encoding         : 65001
 
-Date: 2020-11-20 20:42:55
+Date: 2020-11-21 10:27:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,17 +26,17 @@ CREATE TABLE `bus_customer` (
   `phone` varchar(255) DEFAULT NULL,
   `available` int(11) DEFAULT NULL,
   `logistics_base_id` int(11) DEFAULT NULL COMMENT '用来关联物流信息',
+  `tenant_id` int(11) DEFAULT NULL COMMENT '商铺（租户）ID',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_customer
 -- ----------------------------
-INSERT INTO `bus_customer` VALUES ('1', '小张布艺', '商丘', '15279230588', '1', '1');
-INSERT INTO `bus_customer` VALUES ('2', '小丽布艺', '南阳', '13064154936', '1', '2');
-INSERT INTO `bus_customer` VALUES ('3', '小红布艺', '心想', '13617020687', '1', '2');
-INSERT INTO `bus_customer` VALUES ('4', '一帘幽梦', '十里大道1039号', '13648524759', '1', '3');
-INSERT INTO `bus_customer` VALUES ('15', '真真', '南阳', '123456', '1', '3');
+INSERT INTO `bus_customer` VALUES ('1', '小张布艺', '商丘', '15279230588', '1', '1', '1');
+INSERT INTO `bus_customer` VALUES ('2', '小丽布艺', '南阳', '13064154936', '1', '2', '1');
+INSERT INTO `bus_customer` VALUES ('3', '小红布艺', '心想', '13617020687', '1', '2', '1');
+INSERT INTO `bus_customer` VALUES ('4', '一帘幽梦', '十里大道1039号', '13648524759', '1', '3', '1');
 
 -- ----------------------------
 -- Table structure for bus_goods
@@ -119,17 +119,19 @@ CREATE TABLE `bus_logistics_base` (
   `logistics_phone` varchar(255) DEFAULT NULL,
   `type` int(11) DEFAULT NULL,
   `logistics_cost` decimal(10,2) DEFAULT NULL COMMENT '物流单价',
+  `tenant_id` int(11) DEFAULT NULL COMMENT '商铺（租户）ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_logistics_base
 -- ----------------------------
-INSERT INTO `bus_logistics_base` VALUES ('1', '达发物流', '陕县,开封', '15290865083', '1', '10.00');
-INSERT INTO `bus_logistics_base` VALUES ('2', '创新物流', '商丘,民权', '15290865084', '1', '10.00');
-INSERT INTO `bus_logistics_base` VALUES ('3', '安利物流', '新郑,开封', '15290865085', '1', '10.50');
-INSERT INTO `bus_logistics_base` VALUES ('12', '方圆物流', '开封', '123456', '1', '10.00');
-INSERT INTO `bus_logistics_base` VALUES ('13', '浩宇物流', '浙江', '1256489', '2', '80.00');
+INSERT INTO `bus_logistics_base` VALUES ('1', '达发物流', '陕县,开封', '15290865083', '1', '10.00', '1');
+INSERT INTO `bus_logistics_base` VALUES ('2', '创新物流', '商丘,民权', '15290865084', '1', '10.00', '1');
+INSERT INTO `bus_logistics_base` VALUES ('3', '安利物流', '新郑,开封', '15290865085', '1', '10.50', '1');
+INSERT INTO `bus_logistics_base` VALUES ('12', '方圆物流', '开封', '123456', '1', '10.00', '1');
+INSERT INTO `bus_logistics_base` VALUES ('13', '浩宇物流', '浙江', '1256489', '2', '80.00', '1');
+INSERT INTO `bus_logistics_base` VALUES ('14', '测试物流', '银河系', '123456', '1', '96.00', '0');
 
 -- ----------------------------
 -- Table structure for bus_outport
@@ -162,28 +164,25 @@ DROP TABLE IF EXISTS `bus_provider`;
 CREATE TABLE `bus_provider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `providername` varchar(255) DEFAULT NULL,
-  `zip` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `telephone` varchar(255) DEFAULT NULL,
-  `connectionperson` varchar(255) DEFAULT NULL,
-  `phone` varchar(255) DEFAULT NULL,
   `bank` varchar(255) DEFAULT NULL,
   `account` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `fax` varchar(255) DEFAULT NULL,
   `available` int(11) DEFAULT NULL,
+  `tenant_id` int(11) DEFAULT NULL COMMENT '租户（店铺）ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of bus_provider
 -- ----------------------------
-INSERT INTO `bus_provider` VALUES ('1', '旺旺食品', '434000', '仙桃', '0728-4124312', '小明', '13413441141', '中国农业银行', '654124345131', '12312321@sina.com', '5123123', '1');
-INSERT INTO `bus_provider` VALUES ('2', '达利园食品', '430000', '汉川', '0728-4124312', '大明', '13413441141', '中国农业银行', '654124345131', '12312321@sina.com', '5123123', '1');
-INSERT INTO `bus_provider` VALUES ('3', '娃哈哈集团', '513131', '杭州', '21312', '小晨', '12312', '建设银行', '512314141541', '123131', '312312', '1');
-INSERT INTO `bus_provider` VALUES ('4', '蒙牛集团', '332005', '内蒙古', '0790-362514856', '姿态', '13617252689', '中国银行', '36214587962509', '13617252689@163.com', '364145', '1');
-INSERT INTO `bus_provider` VALUES ('5', '伊利集团', '562115', '内蒙古', '0792-36548569', 'Rita', '13698560566', '建设银行', '3621458963596509', '13698560566@163.com', '362514', '1');
-INSERT INTO `bus_provider` VALUES ('12', 'asdf', '123', 'sdf', '123', 'sda', '123', '123', '123', '132', '213', '1');
+INSERT INTO `bus_provider` VALUES ('1', '旺旺食品', '仙桃', '0728-4124312', '中国农业银行', '654124345131', '12312321@sina.com', '1', '0');
+INSERT INTO `bus_provider` VALUES ('2', '达利园食品', '汉川', '0728-4124312', '中国农业银行', '654124345131', '12312321@sina.com', '1', '0');
+INSERT INTO `bus_provider` VALUES ('3', '娃哈哈集团', '杭州', '0790-362514856', '建设银行', '512314141541', '12312321@sina.com', '1', '0');
+INSERT INTO `bus_provider` VALUES ('4', '蒙牛集团', '内蒙古', '0790-362514856', '中国银行', '36214587962509', '13617252689@163.com', '1', '0');
+INSERT INTO `bus_provider` VALUES ('5', '伊利集团', '内蒙古', '0792-36548569', '建设银行', '3621458963596509', '13698560566@163.com', '1', '0');
+INSERT INTO `bus_provider` VALUES ('13', '彩云布艺', '浙江', '123456789', '杭州工行', '123456789456789', 'www@163.com', '1', '1');
 
 -- ----------------------------
 -- Table structure for bus_sales
@@ -240,401 +239,21 @@ CREATE TABLE `sys_loginfo` (
   `loginip` varchar(255) DEFAULT NULL,
   `logintime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=404 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=411 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_loginfo
 -- ----------------------------
-INSERT INTO `sys_loginfo` VALUES ('14', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-25 14:45:25');
-INSERT INTO `sys_loginfo` VALUES ('15', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-25 15:21:52');
-INSERT INTO `sys_loginfo` VALUES ('16', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-25 15:23:39');
-INSERT INTO `sys_loginfo` VALUES ('17', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-25 15:26:10');
-INSERT INTO `sys_loginfo` VALUES ('18', '落亦--luoyi', '127.0.0.1', '2019-11-25 15:53:00');
-INSERT INTO `sys_loginfo` VALUES ('19', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 08:32:41');
-INSERT INTO `sys_loginfo` VALUES ('20', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 09:18:06');
-INSERT INTO `sys_loginfo` VALUES ('21', '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-11-26 09:59:19');
-INSERT INTO `sys_loginfo` VALUES ('22', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 10:48:05');
-INSERT INTO `sys_loginfo` VALUES ('23', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 15:15:03');
-INSERT INTO `sys_loginfo` VALUES ('24', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 15:42:02');
-INSERT INTO `sys_loginfo` VALUES ('25', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 16:56:54');
-INSERT INTO `sys_loginfo` VALUES ('26', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 18:07:44');
-INSERT INTO `sys_loginfo` VALUES ('27', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 18:08:08');
-INSERT INTO `sys_loginfo` VALUES ('28', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 19:23:12');
-INSERT INTO `sys_loginfo` VALUES ('29', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 20:46:57');
-INSERT INTO `sys_loginfo` VALUES ('30', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 21:17:48');
-INSERT INTO `sys_loginfo` VALUES ('31', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-26 21:21:16');
-INSERT INTO `sys_loginfo` VALUES ('32', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-27 20:13:56');
-INSERT INTO `sys_loginfo` VALUES ('33', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-27 20:29:17');
-INSERT INTO `sys_loginfo` VALUES ('34', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-27 20:30:38');
-INSERT INTO `sys_loginfo` VALUES ('35', '落亦--luoyi', '127.0.0.1', '2019-11-27 20:32:36');
-INSERT INTO `sys_loginfo` VALUES ('36', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-27 20:33:47');
-INSERT INTO `sys_loginfo` VALUES ('37', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 08:52:02');
-INSERT INTO `sys_loginfo` VALUES ('38', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:09:14');
-INSERT INTO `sys_loginfo` VALUES ('39', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:09:23');
-INSERT INTO `sys_loginfo` VALUES ('40', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:10:00');
-INSERT INTO `sys_loginfo` VALUES ('41', '落亦--luoyi', '127.0.0.1', '2019-11-28 09:10:53');
-INSERT INTO `sys_loginfo` VALUES ('42', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:17:06');
-INSERT INTO `sys_loginfo` VALUES ('43', '落亦--luoyi', '127.0.0.1', '2019-11-28 09:18:25');
-INSERT INTO `sys_loginfo` VALUES ('44', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:19:19');
-INSERT INTO `sys_loginfo` VALUES ('45', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:43:12');
-INSERT INTO `sys_loginfo` VALUES ('46', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:55:00');
-INSERT INTO `sys_loginfo` VALUES ('47', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:56:54');
-INSERT INTO `sys_loginfo` VALUES ('48', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 09:59:18');
-INSERT INTO `sys_loginfo` VALUES ('49', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 10:28:42');
-INSERT INTO `sys_loginfo` VALUES ('50', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 10:35:39');
-INSERT INTO `sys_loginfo` VALUES ('51', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 14:46:07');
-INSERT INTO `sys_loginfo` VALUES ('52', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 14:56:34');
-INSERT INTO `sys_loginfo` VALUES ('53', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 14:57:11');
-INSERT INTO `sys_loginfo` VALUES ('54', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 20:37:00');
-INSERT INTO `sys_loginfo` VALUES ('55', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 21:29:07');
-INSERT INTO `sys_loginfo` VALUES ('56', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 21:35:40');
-INSERT INTO `sys_loginfo` VALUES ('57', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 21:38:15');
-INSERT INTO `sys_loginfo` VALUES ('58', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-28 21:39:56');
-INSERT INTO `sys_loginfo` VALUES ('59', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 08:34:49');
-INSERT INTO `sys_loginfo` VALUES ('60', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 09:15:39');
-INSERT INTO `sys_loginfo` VALUES ('61', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 09:24:44');
-INSERT INTO `sys_loginfo` VALUES ('62', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 09:29:50');
-INSERT INTO `sys_loginfo` VALUES ('63', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 10:13:31');
-INSERT INTO `sys_loginfo` VALUES ('64', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 10:45:24');
-INSERT INTO `sys_loginfo` VALUES ('65', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 10:51:44');
-INSERT INTO `sys_loginfo` VALUES ('66', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 11:07:38');
-INSERT INTO `sys_loginfo` VALUES ('67', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 21:52:58');
-INSERT INTO `sys_loginfo` VALUES ('68', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:00:53');
-INSERT INTO `sys_loginfo` VALUES ('69', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:13:18');
-INSERT INTO `sys_loginfo` VALUES ('70', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:23:34');
-INSERT INTO `sys_loginfo` VALUES ('71', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:28:58');
-INSERT INTO `sys_loginfo` VALUES ('72', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:30:01');
-INSERT INTO `sys_loginfo` VALUES ('73', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:37:01');
-INSERT INTO `sys_loginfo` VALUES ('74', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:37:47');
-INSERT INTO `sys_loginfo` VALUES ('75', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 22:45:21');
-INSERT INTO `sys_loginfo` VALUES ('76', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 23:05:59');
-INSERT INTO `sys_loginfo` VALUES ('77', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 23:14:08');
-INSERT INTO `sys_loginfo` VALUES ('78', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 23:19:56');
-INSERT INTO `sys_loginfo` VALUES ('79', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-29 23:29:39');
-INSERT INTO `sys_loginfo` VALUES ('80', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 11:24:06');
-INSERT INTO `sys_loginfo` VALUES ('81', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 11:40:39');
-INSERT INTO `sys_loginfo` VALUES ('82', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 11:42:36');
-INSERT INTO `sys_loginfo` VALUES ('83', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 11:47:08');
-INSERT INTO `sys_loginfo` VALUES ('84', '落亦--luoyi', '127.0.0.1', '2019-11-30 11:59:23');
-INSERT INTO `sys_loginfo` VALUES ('85', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 12:03:46');
-INSERT INTO `sys_loginfo` VALUES ('86', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 12:18:12');
-INSERT INTO `sys_loginfo` VALUES ('87', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 12:58:59');
-INSERT INTO `sys_loginfo` VALUES ('88', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-11-30 18:29:39');
-INSERT INTO `sys_loginfo` VALUES ('89', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-01 09:37:38');
-INSERT INTO `sys_loginfo` VALUES ('90', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-01 11:46:14');
-INSERT INTO `sys_loginfo` VALUES ('91', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 10:39:07');
-INSERT INTO `sys_loginfo` VALUES ('92', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 10:42:01');
-INSERT INTO `sys_loginfo` VALUES ('93', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 10:44:22');
-INSERT INTO `sys_loginfo` VALUES ('94', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 10:49:58');
-INSERT INTO `sys_loginfo` VALUES ('95', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 18:40:27');
-INSERT INTO `sys_loginfo` VALUES ('96', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 18:41:44');
-INSERT INTO `sys_loginfo` VALUES ('97', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 18:51:51');
-INSERT INTO `sys_loginfo` VALUES ('98', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-02 19:44:13');
-INSERT INTO `sys_loginfo` VALUES ('99', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 08:40:06');
-INSERT INTO `sys_loginfo` VALUES ('100', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 09:17:34');
-INSERT INTO `sys_loginfo` VALUES ('101', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 09:49:33');
-INSERT INTO `sys_loginfo` VALUES ('102', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 09:49:54');
-INSERT INTO `sys_loginfo` VALUES ('103', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 10:46:23');
-INSERT INTO `sys_loginfo` VALUES ('104', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 10:52:24');
-INSERT INTO `sys_loginfo` VALUES ('105', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 11:12:01');
-INSERT INTO `sys_loginfo` VALUES ('106', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 13:52:12');
-INSERT INTO `sys_loginfo` VALUES ('107', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:04:33');
-INSERT INTO `sys_loginfo` VALUES ('108', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:09:36');
-INSERT INTO `sys_loginfo` VALUES ('109', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:12:28');
-INSERT INTO `sys_loginfo` VALUES ('110', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:13:55');
-INSERT INTO `sys_loginfo` VALUES ('111', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:20:36');
-INSERT INTO `sys_loginfo` VALUES ('112', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:21:06');
-INSERT INTO `sys_loginfo` VALUES ('113', '苏北旦-subeidan', '0:0:0:0:0:0:0:1', '2019-12-03 14:27:37');
-INSERT INTO `sys_loginfo` VALUES ('114', '旦素一-dansuyi', '0:0:0:0:0:0:0:1', '2019-12-03 14:27:54');
-INSERT INTO `sys_loginfo` VALUES ('115', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 15:04:21');
-INSERT INTO `sys_loginfo` VALUES ('116', '李九-lijiu', '0:0:0:0:0:0:0:1', '2019-12-03 15:47:02');
-INSERT INTO `sys_loginfo` VALUES ('117', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-03 15:47:25');
-INSERT INTO `sys_loginfo` VALUES ('118', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 08:36:54');
-INSERT INTO `sys_loginfo` VALUES ('119', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 09:18:26');
-INSERT INTO `sys_loginfo` VALUES ('120', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 09:40:35');
-INSERT INTO `sys_loginfo` VALUES ('121', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 10:14:43');
-INSERT INTO `sys_loginfo` VALUES ('122', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 10:27:12');
-INSERT INTO `sys_loginfo` VALUES ('123', '李约素-liyuesu', '0:0:0:0:0:0:0:1', '2019-12-04 10:28:12');
-INSERT INTO `sys_loginfo` VALUES ('124', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-04 10:28:20');
-INSERT INTO `sys_loginfo` VALUES ('125', '赵六-zhaoliu', '0:0:0:0:0:0:0:1', '2019-12-04 10:28:28');
-INSERT INTO `sys_loginfo` VALUES ('126', '王五-wangwu', '0:0:0:0:0:0:0:1', '2019-12-04 10:28:40');
-INSERT INTO `sys_loginfo` VALUES ('127', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 10:28:51');
-INSERT INTO `sys_loginfo` VALUES ('128', '苏北旦-subeidan', '0:0:0:0:0:0:0:1', '2019-12-04 10:30:00');
-INSERT INTO `sys_loginfo` VALUES ('129', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 10:30:16');
-INSERT INTO `sys_loginfo` VALUES ('130', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-04 11:13:42');
-INSERT INTO `sys_loginfo` VALUES ('131', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-04 11:15:22');
-INSERT INTO `sys_loginfo` VALUES ('132', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-04 11:16:03');
-INSERT INTO `sys_loginfo` VALUES ('133', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 10:27:27');
-INSERT INTO `sys_loginfo` VALUES ('134', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 10:32:11');
-INSERT INTO `sys_loginfo` VALUES ('135', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 10:39:49');
-INSERT INTO `sys_loginfo` VALUES ('136', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 10:43:26');
-INSERT INTO `sys_loginfo` VALUES ('137', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 10:44:41');
-INSERT INTO `sys_loginfo` VALUES ('138', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 15:35:56');
-INSERT INTO `sys_loginfo` VALUES ('139', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 15:53:28');
-INSERT INTO `sys_loginfo` VALUES ('140', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 16:02:42');
-INSERT INTO `sys_loginfo` VALUES ('141', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 16:50:28');
-INSERT INTO `sys_loginfo` VALUES ('142', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 17:20:01');
-INSERT INTO `sys_loginfo` VALUES ('143', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 17:22:13');
-INSERT INTO `sys_loginfo` VALUES ('144', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 17:23:19');
-INSERT INTO `sys_loginfo` VALUES ('145', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 17:23:51');
-INSERT INTO `sys_loginfo` VALUES ('146', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 17:38:39');
-INSERT INTO `sys_loginfo` VALUES ('147', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 20:38:28');
-INSERT INTO `sys_loginfo` VALUES ('148', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-05 21:05:55');
-INSERT INTO `sys_loginfo` VALUES ('149', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-05 21:06:49');
-INSERT INTO `sys_loginfo` VALUES ('150', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-05 21:07:39');
-INSERT INTO `sys_loginfo` VALUES ('151', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-05 21:10:07');
-INSERT INTO `sys_loginfo` VALUES ('152', '苏北旦-subeidan', '0:0:0:0:0:0:0:1', '2019-12-05 21:11:47');
-INSERT INTO `sys_loginfo` VALUES ('153', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 21:11:58');
-INSERT INTO `sys_loginfo` VALUES ('154', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 22:54:31');
-INSERT INTO `sys_loginfo` VALUES ('155', '苏北旦-subeidan', '0:0:0:0:0:0:0:1', '2019-12-05 22:55:00');
-INSERT INTO `sys_loginfo` VALUES ('156', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 22:57:38');
-INSERT INTO `sys_loginfo` VALUES ('157', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 22:59:18');
-INSERT INTO `sys_loginfo` VALUES ('158', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-05 22:59:38');
-INSERT INTO `sys_loginfo` VALUES ('159', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:36:42');
-INSERT INTO `sys_loginfo` VALUES ('160', '苏北旦-subeidan', '0:0:0:0:0:0:0:1', '2019-12-06 08:42:18');
-INSERT INTO `sys_loginfo` VALUES ('161', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:42:46');
-INSERT INTO `sys_loginfo` VALUES ('162', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-06 08:45:31');
-INSERT INTO `sys_loginfo` VALUES ('163', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:47:03');
-INSERT INTO `sys_loginfo` VALUES ('164', '李四-lisi', '0:0:0:0:0:0:0:1', '2019-12-06 08:47:41');
-INSERT INTO `sys_loginfo` VALUES ('165', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:48:00');
-INSERT INTO `sys_loginfo` VALUES ('166', '王五-wangwu', '0:0:0:0:0:0:0:1', '2019-12-06 08:48:52');
-INSERT INTO `sys_loginfo` VALUES ('167', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:49:12');
-INSERT INTO `sys_loginfo` VALUES ('168', '上单-shangdan', '0:0:0:0:0:0:0:1', '2019-12-06 08:51:36');
-INSERT INTO `sys_loginfo` VALUES ('169', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:51:52');
-INSERT INTO `sys_loginfo` VALUES ('170', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 08:53:36');
-INSERT INTO `sys_loginfo` VALUES ('171', '上单-shangdan', '0:0:0:0:0:0:0:1', '2019-12-06 08:55:07');
-INSERT INTO `sys_loginfo` VALUES ('172', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 09:31:52');
-INSERT INTO `sys_loginfo` VALUES ('173', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 22:30:06');
-INSERT INTO `sys_loginfo` VALUES ('174', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:00:14');
-INSERT INTO `sys_loginfo` VALUES ('175', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:19:13');
-INSERT INTO `sys_loginfo` VALUES ('176', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:22:29');
-INSERT INTO `sys_loginfo` VALUES ('177', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:24:33');
-INSERT INTO `sys_loginfo` VALUES ('178', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:26:13');
-INSERT INTO `sys_loginfo` VALUES ('179', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2019-12-06 23:32:24');
-INSERT INTO `sys_loginfo` VALUES ('180', '超级管理员-system', '0:0:0:0:0:0:0:1', '2019-12-09 16:14:07');
-INSERT INTO `sys_loginfo` VALUES ('181', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-01-21 03:02:00');
-INSERT INTO `sys_loginfo` VALUES ('182', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-01-21 03:13:25');
-INSERT INTO `sys_loginfo` VALUES ('183', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-01-21 03:17:40');
-INSERT INTO `sys_loginfo` VALUES ('184', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-01-21 03:23:43');
-INSERT INTO `sys_loginfo` VALUES ('185', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-01-21 03:28:21');
-INSERT INTO `sys_loginfo` VALUES ('186', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-06 02:28:24');
-INSERT INTO `sys_loginfo` VALUES ('187', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-06 03:02:00');
-INSERT INTO `sys_loginfo` VALUES ('188', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-07 07:54:49');
-INSERT INTO `sys_loginfo` VALUES ('189', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-08 06:23:55');
-INSERT INTO `sys_loginfo` VALUES ('190', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-09 07:45:00');
-INSERT INTO `sys_loginfo` VALUES ('191', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 03:01:19');
-INSERT INTO `sys_loginfo` VALUES ('192', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:08:23');
-INSERT INTO `sys_loginfo` VALUES ('193', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:16:36');
-INSERT INTO `sys_loginfo` VALUES ('194', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:20:26');
-INSERT INTO `sys_loginfo` VALUES ('195', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:23:37');
-INSERT INTO `sys_loginfo` VALUES ('196', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:25:52');
-INSERT INTO `sys_loginfo` VALUES ('197', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:34:37');
-INSERT INTO `sys_loginfo` VALUES ('198', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:36:25');
-INSERT INTO `sys_loginfo` VALUES ('199', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:39:03');
-INSERT INTO `sys_loginfo` VALUES ('200', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:42:08');
-INSERT INTO `sys_loginfo` VALUES ('201', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:43:07');
-INSERT INTO `sys_loginfo` VALUES ('202', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:44:12');
-INSERT INTO `sys_loginfo` VALUES ('203', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-12 04:44:54');
-INSERT INTO `sys_loginfo` VALUES ('204', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:09:37');
-INSERT INTO `sys_loginfo` VALUES ('205', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:11:53');
-INSERT INTO `sys_loginfo` VALUES ('206', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:13:10');
-INSERT INTO `sys_loginfo` VALUES ('207', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:14:13');
-INSERT INTO `sys_loginfo` VALUES ('208', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:19:38');
-INSERT INTO `sys_loginfo` VALUES ('209', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:22:05');
-INSERT INTO `sys_loginfo` VALUES ('210', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:26:19');
-INSERT INTO `sys_loginfo` VALUES ('211', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 06:30:35');
-INSERT INTO `sys_loginfo` VALUES ('212', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 07:16:07');
-INSERT INTO `sys_loginfo` VALUES ('213', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 07:30:52');
-INSERT INTO `sys_loginfo` VALUES ('214', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 08:05:43');
-INSERT INTO `sys_loginfo` VALUES ('215', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 08:23:39');
-INSERT INTO `sys_loginfo` VALUES ('216', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 08:58:01');
-INSERT INTO `sys_loginfo` VALUES ('217', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 09:06:30');
-INSERT INTO `sys_loginfo` VALUES ('218', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-14 09:52:11');
-INSERT INTO `sys_loginfo` VALUES ('219', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 07:33:16');
-INSERT INTO `sys_loginfo` VALUES ('220', '李月素-liyuesu', '0:0:0:0:0:0:0:1', '2020-02-24 07:39:04');
-INSERT INTO `sys_loginfo` VALUES ('221', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 07:40:26');
-INSERT INTO `sys_loginfo` VALUES ('222', '李月素-liyuesu', '0:0:0:0:0:0:0:1', '2020-02-24 07:47:07');
-INSERT INTO `sys_loginfo` VALUES ('223', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 07:47:40');
-INSERT INTO `sys_loginfo` VALUES ('224', '落亦--luoyi', '127.0.0.1', '2020-02-24 07:55:53');
-INSERT INTO `sys_loginfo` VALUES ('225', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 08:09:22');
-INSERT INTO `sys_loginfo` VALUES ('226', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 08:53:10');
-INSERT INTO `sys_loginfo` VALUES ('227', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 08:57:15');
-INSERT INTO `sys_loginfo` VALUES ('228', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:04:42');
-INSERT INTO `sys_loginfo` VALUES ('229', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:24:06');
-INSERT INTO `sys_loginfo` VALUES ('230', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:26:52');
-INSERT INTO `sys_loginfo` VALUES ('231', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:32:45');
-INSERT INTO `sys_loginfo` VALUES ('232', '落亦--luoyi', '127.0.0.1', '2020-02-24 09:35:36');
-INSERT INTO `sys_loginfo` VALUES ('233', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:38:13');
-INSERT INTO `sys_loginfo` VALUES ('234', '李月素-liyuesu', '0:0:0:0:0:0:0:1', '2020-02-24 09:42:05');
-INSERT INTO `sys_loginfo` VALUES ('235', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:42:47');
-INSERT INTO `sys_loginfo` VALUES ('236', '李月素-liyuesu', '0:0:0:0:0:0:0:1', '2020-02-24 09:43:05');
-INSERT INTO `sys_loginfo` VALUES ('237', '李月素-liyuesu', '0:0:0:0:0:0:0:1', '2020-02-24 09:43:42');
-INSERT INTO `sys_loginfo` VALUES ('238', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:44:05');
-INSERT INTO `sys_loginfo` VALUES ('239', '李四-lisi', '0:0:0:0:0:0:0:1', '2020-02-24 09:44:47');
-INSERT INTO `sys_loginfo` VALUES ('240', '李四-lisi', '0:0:0:0:0:0:0:1', '2020-02-24 09:45:14');
-INSERT INTO `sys_loginfo` VALUES ('241', '王五-wangwu', '0:0:0:0:0:0:0:1', '2020-02-24 09:45:35');
-INSERT INTO `sys_loginfo` VALUES ('242', '赵六-zhaoliu', '0:0:0:0:0:0:0:1', '2020-02-24 09:45:55');
-INSERT INTO `sys_loginfo` VALUES ('243', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-02-24 09:46:32');
-INSERT INTO `sys_loginfo` VALUES ('244', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-01 09:46:24');
-INSERT INTO `sys_loginfo` VALUES ('245', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 02:28:15');
-INSERT INTO `sys_loginfo` VALUES ('246', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 02:42:09');
-INSERT INTO `sys_loginfo` VALUES ('247', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 03:02:07');
-INSERT INTO `sys_loginfo` VALUES ('248', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 03:06:11');
-INSERT INTO `sys_loginfo` VALUES ('249', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 03:12:35');
-INSERT INTO `sys_loginfo` VALUES ('250', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 03:28:54');
-INSERT INTO `sys_loginfo` VALUES ('251', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 03:53:25');
-INSERT INTO `sys_loginfo` VALUES ('252', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-06 12:58:05');
-INSERT INTO `sys_loginfo` VALUES ('253', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 03:11:53');
-INSERT INTO `sys_loginfo` VALUES ('254', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 03:50:55');
-INSERT INTO `sys_loginfo` VALUES ('255', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 04:13:39');
-INSERT INTO `sys_loginfo` VALUES ('256', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 04:16:53');
-INSERT INTO `sys_loginfo` VALUES ('257', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 04:23:31');
-INSERT INTO `sys_loginfo` VALUES ('258', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 04:25:49');
-INSERT INTO `sys_loginfo` VALUES ('259', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 04:34:00');
-INSERT INTO `sys_loginfo` VALUES ('260', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 07:24:46');
-INSERT INTO `sys_loginfo` VALUES ('261', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 07:44:40');
-INSERT INTO `sys_loginfo` VALUES ('262', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 07:50:38');
-INSERT INTO `sys_loginfo` VALUES ('263', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 07:52:28');
-INSERT INTO `sys_loginfo` VALUES ('264', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 07:59:44');
-INSERT INTO `sys_loginfo` VALUES ('265', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 08:10:44');
-INSERT INTO `sys_loginfo` VALUES ('266', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-07 08:13:23');
-INSERT INTO `sys_loginfo` VALUES ('267', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 03:37:14');
-INSERT INTO `sys_loginfo` VALUES ('268', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 03:39:03');
-INSERT INTO `sys_loginfo` VALUES ('269', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 03:41:25');
-INSERT INTO `sys_loginfo` VALUES ('270', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 03:43:31');
-INSERT INTO `sys_loginfo` VALUES ('271', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 03:56:23');
-INSERT INTO `sys_loginfo` VALUES ('272', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 04:17:22');
-INSERT INTO `sys_loginfo` VALUES ('273', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 04:29:46');
-INSERT INTO `sys_loginfo` VALUES ('274', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 09:53:15');
-INSERT INTO `sys_loginfo` VALUES ('275', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:07:53');
-INSERT INTO `sys_loginfo` VALUES ('276', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:30:36');
-INSERT INTO `sys_loginfo` VALUES ('277', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:32:45');
-INSERT INTO `sys_loginfo` VALUES ('278', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:36:43');
-INSERT INTO `sys_loginfo` VALUES ('279', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:50:53');
-INSERT INTO `sys_loginfo` VALUES ('280', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:52:45');
-INSERT INTO `sys_loginfo` VALUES ('281', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:53:31');
-INSERT INTO `sys_loginfo` VALUES ('282', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:54:57');
-INSERT INTO `sys_loginfo` VALUES ('283', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:55:39');
-INSERT INTO `sys_loginfo` VALUES ('284', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 10:57:06');
-INSERT INTO `sys_loginfo` VALUES ('285', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 11:00:54');
-INSERT INTO `sys_loginfo` VALUES ('286', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 11:04:41');
-INSERT INTO `sys_loginfo` VALUES ('287', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-08 11:08:39');
-INSERT INTO `sys_loginfo` VALUES ('288', '落亦--luoyi', '0:0:0:0:0:0:0:1', '2020-03-09 08:36:06');
-INSERT INTO `sys_loginfo` VALUES ('289', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 14:46:10');
-INSERT INTO `sys_loginfo` VALUES ('290', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 14:51:52');
-INSERT INTO `sys_loginfo` VALUES ('291', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 14:54:45');
-INSERT INTO `sys_loginfo` VALUES ('292', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 14:55:18');
-INSERT INTO `sys_loginfo` VALUES ('293', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 15:10:12');
-INSERT INTO `sys_loginfo` VALUES ('294', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 15:59:29');
-INSERT INTO `sys_loginfo` VALUES ('295', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 16:04:34');
-INSERT INTO `sys_loginfo` VALUES ('296', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 16:09:35');
-INSERT INTO `sys_loginfo` VALUES ('297', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-16 16:14:40');
-INSERT INTO `sys_loginfo` VALUES ('298', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 02:35:12');
-INSERT INTO `sys_loginfo` VALUES ('299', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 03:10:18');
-INSERT INTO `sys_loginfo` VALUES ('300', 'wll-wll', '0:0:0:0:0:0:0:1', '2020-11-17 03:47:13');
-INSERT INTO `sys_loginfo` VALUES ('301', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 03:48:22');
-INSERT INTO `sys_loginfo` VALUES ('302', 'wll-wll', '0:0:0:0:0:0:0:1', '2020-11-17 03:48:58');
-INSERT INTO `sys_loginfo` VALUES ('303', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 03:51:42');
-INSERT INTO `sys_loginfo` VALUES ('304', '李四-lisi', '0:0:0:0:0:0:0:1', '2020-11-17 03:53:13');
-INSERT INTO `sys_loginfo` VALUES ('305', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 03:53:55');
-INSERT INTO `sys_loginfo` VALUES ('306', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 04:36:37');
-INSERT INTO `sys_loginfo` VALUES ('307', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 05:25:12');
-INSERT INTO `sys_loginfo` VALUES ('308', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-17 12:26:51');
-INSERT INTO `sys_loginfo` VALUES ('309', '超级管理员-system', '192.168.30.1', '2020-11-17 14:40:41');
-INSERT INTO `sys_loginfo` VALUES ('310', '超级管理员-system', '192.168.30.1', '2020-11-17 14:45:03');
-INSERT INTO `sys_loginfo` VALUES ('311', '超级管理员-system', '192.168.30.1', '2020-11-17 15:18:31');
-INSERT INTO `sys_loginfo` VALUES ('312', '超级管理员-system', '192.168.30.1', '2020-11-17 15:23:36');
-INSERT INTO `sys_loginfo` VALUES ('313', '超级管理员-system', '192.168.30.1', '2020-11-17 15:37:14');
-INSERT INTO `sys_loginfo` VALUES ('314', '超级管理员-system', '192.168.30.1', '2020-11-17 15:41:53');
-INSERT INTO `sys_loginfo` VALUES ('315', '超级管理员-system', '192.168.30.1', '2020-11-17 15:44:40');
-INSERT INTO `sys_loginfo` VALUES ('316', '超级管理员-system', '192.168.30.1', '2020-11-17 15:46:29');
-INSERT INTO `sys_loginfo` VALUES ('317', '超级管理员-system', '192.168.30.1', '2020-11-17 15:51:03');
-INSERT INTO `sys_loginfo` VALUES ('318', '超级管理员-system', '192.168.30.1', '2020-11-17 15:54:05');
-INSERT INTO `sys_loginfo` VALUES ('319', '超级管理员-system', '192.168.30.1', '2020-11-17 16:02:11');
-INSERT INTO `sys_loginfo` VALUES ('320', '超级管理员-system', '192.168.30.1', '2020-11-17 16:04:14');
-INSERT INTO `sys_loginfo` VALUES ('321', '超级管理员-system', '192.168.30.1', '2020-11-17 16:08:58');
-INSERT INTO `sys_loginfo` VALUES ('322', '超级管理员-system', '192.168.30.1', '2020-11-17 16:13:20');
-INSERT INTO `sys_loginfo` VALUES ('323', '超级管理员-system', '192.168.30.1', '2020-11-17 16:15:55');
-INSERT INTO `sys_loginfo` VALUES ('324', '超级管理员-system', '192.168.30.1', '2020-11-17 16:21:51');
-INSERT INTO `sys_loginfo` VALUES ('325', '超级管理员-system', '192.168.30.1', '2020-11-17 16:24:15');
-INSERT INTO `sys_loginfo` VALUES ('326', '超级管理员-system', '192.168.30.1', '2020-11-17 16:40:57');
-INSERT INTO `sys_loginfo` VALUES ('327', '超级管理员-system', '192.168.30.1', '2020-11-17 16:43:14');
-INSERT INTO `sys_loginfo` VALUES ('328', '超级管理员-system', '192.168.30.1', '2020-11-17 16:44:01');
-INSERT INTO `sys_loginfo` VALUES ('329', '超级管理员-system', '192.168.30.1', '2020-11-17 16:45:29');
-INSERT INTO `sys_loginfo` VALUES ('330', '超级管理员-system', '192.168.30.1', '2020-11-17 16:51:26');
-INSERT INTO `sys_loginfo` VALUES ('331', '超级管理员-system', '192.168.30.1', '2020-11-17 16:54:12');
-INSERT INTO `sys_loginfo` VALUES ('332', '超级管理员-system', '192.168.30.1', '2020-11-17 16:55:45');
-INSERT INTO `sys_loginfo` VALUES ('333', '超级管理员-system', '192.168.30.1', '2020-11-17 16:59:07');
-INSERT INTO `sys_loginfo` VALUES ('334', '超级管理员-system', '192.168.30.1', '2020-11-17 17:04:45');
-INSERT INTO `sys_loginfo` VALUES ('335', '超级管理员-system', '192.168.30.1', '2020-11-18 11:40:47');
-INSERT INTO `sys_loginfo` VALUES ('336', '超级管理员-system', '192.168.30.1', '2020-11-18 12:12:37');
-INSERT INTO `sys_loginfo` VALUES ('337', '超级管理员-system', '192.168.30.1', '2020-11-18 12:13:26');
-INSERT INTO `sys_loginfo` VALUES ('338', '超级管理员-system', '192.168.30.1', '2020-11-18 12:35:00');
-INSERT INTO `sys_loginfo` VALUES ('339', '超级管理员-system', '192.168.30.1', '2020-11-18 12:36:15');
-INSERT INTO `sys_loginfo` VALUES ('340', '超级管理员-system', '192.168.30.1', '2020-11-18 12:38:45');
-INSERT INTO `sys_loginfo` VALUES ('341', '超级管理员-system', '192.168.30.1', '2020-11-18 12:41:18');
-INSERT INTO `sys_loginfo` VALUES ('342', '超级管理员-system', '192.168.30.1', '2020-11-18 13:58:14');
-INSERT INTO `sys_loginfo` VALUES ('343', '超级管理员-system', '192.168.30.1', '2020-11-18 14:01:00');
-INSERT INTO `sys_loginfo` VALUES ('344', '超级管理员-system', '192.168.30.1', '2020-11-18 14:03:40');
-INSERT INTO `sys_loginfo` VALUES ('345', '超级管理员-system', '192.168.30.1', '2020-11-18 14:17:42');
-INSERT INTO `sys_loginfo` VALUES ('346', '超级管理员-system', '192.168.30.1', '2020-11-18 14:20:11');
-INSERT INTO `sys_loginfo` VALUES ('347', '超级管理员-system', '192.168.30.1', '2020-11-18 14:27:02');
-INSERT INTO `sys_loginfo` VALUES ('348', '超级管理员-system', '192.168.30.1', '2020-11-18 14:47:27');
-INSERT INTO `sys_loginfo` VALUES ('349', '超级管理员-system', '192.168.30.1', '2020-11-18 14:53:28');
-INSERT INTO `sys_loginfo` VALUES ('350', '超级管理员-system', '192.168.30.1', '2020-11-18 14:54:08');
-INSERT INTO `sys_loginfo` VALUES ('351', '超级管理员-system', '192.168.30.1', '2020-11-18 14:55:56');
-INSERT INTO `sys_loginfo` VALUES ('352', '超级管理员-system', '192.168.30.1', '2020-11-18 14:57:25');
-INSERT INTO `sys_loginfo` VALUES ('353', '超级管理员-system', '192.168.30.1', '2020-11-18 14:58:32');
-INSERT INTO `sys_loginfo` VALUES ('354', '超级管理员-system', '192.168.30.1', '2020-11-18 14:59:31');
-INSERT INTO `sys_loginfo` VALUES ('355', '超级管理员-system', '192.168.30.1', '2020-11-18 15:02:36');
-INSERT INTO `sys_loginfo` VALUES ('356', '超级管理员-system', '192.168.30.1', '2020-11-19 15:00:59');
-INSERT INTO `sys_loginfo` VALUES ('357', '超级管理员-system', '192.168.30.1', '2020-11-19 15:11:27');
-INSERT INTO `sys_loginfo` VALUES ('358', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 15:13:45');
-INSERT INTO `sys_loginfo` VALUES ('359', '超级管理员-system', '192.168.30.1', '2020-11-19 15:23:59');
-INSERT INTO `sys_loginfo` VALUES ('360', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 15:30:26');
-INSERT INTO `sys_loginfo` VALUES ('361', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:03:30');
-INSERT INTO `sys_loginfo` VALUES ('362', '超级管理员-system', '192.168.30.1', '2020-11-19 16:14:32');
-INSERT INTO `sys_loginfo` VALUES ('363', '超级管理员-system', '192.168.30.1', '2020-11-19 16:16:43');
-INSERT INTO `sys_loginfo` VALUES ('364', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:24:18');
-INSERT INTO `sys_loginfo` VALUES ('365', '超级管理员-system', '192.168.30.1', '2020-11-19 16:30:39');
-INSERT INTO `sys_loginfo` VALUES ('366', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:34:31');
-INSERT INTO `sys_loginfo` VALUES ('367', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:38:00');
-INSERT INTO `sys_loginfo` VALUES ('368', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:48:18');
-INSERT INTO `sys_loginfo` VALUES ('369', 'wlp-wlp', '192.168.30.1', '2020-11-19 16:54:01');
-INSERT INTO `sys_loginfo` VALUES ('370', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:54:24');
-INSERT INTO `sys_loginfo` VALUES ('371', 'wlp-wlp', '192.168.30.1', '2020-11-19 16:54:43');
-INSERT INTO `sys_loginfo` VALUES ('372', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 16:56:28');
-INSERT INTO `sys_loginfo` VALUES ('373', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:03:30');
-INSERT INTO `sys_loginfo` VALUES ('374', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:14:12');
-INSERT INTO `sys_loginfo` VALUES ('375', '超级管理员-system', '192.168.30.1', '2020-11-19 17:19:04');
-INSERT INTO `sys_loginfo` VALUES ('376', '超级管理员-system', '192.168.30.1', '2020-11-19 17:20:36');
-INSERT INTO `sys_loginfo` VALUES ('377', '超级管理员-system', '192.168.30.1', '2020-11-19 17:22:26');
-INSERT INTO `sys_loginfo` VALUES ('378', 'wlp-wlp', '192.168.30.1', '2020-11-19 17:23:09');
-INSERT INTO `sys_loginfo` VALUES ('379', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:24:01');
-INSERT INTO `sys_loginfo` VALUES ('380', 'wlp-wlp', '192.168.30.1', '2020-11-19 17:25:17');
-INSERT INTO `sys_loginfo` VALUES ('381', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:35:08');
-INSERT INTO `sys_loginfo` VALUES ('382', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 17:39:20');
-INSERT INTO `sys_loginfo` VALUES ('383', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-19 23:49:10');
-INSERT INTO `sys_loginfo` VALUES ('384', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:13:44');
-INSERT INTO `sys_loginfo` VALUES ('385', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:14:35');
-INSERT INTO `sys_loginfo` VALUES ('386', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:14:47');
-INSERT INTO `sys_loginfo` VALUES ('387', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:15:07');
-INSERT INTO `sys_loginfo` VALUES ('388', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:15:50');
-INSERT INTO `sys_loginfo` VALUES ('389', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:16:46');
-INSERT INTO `sys_loginfo` VALUES ('390', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:17:12');
-INSERT INTO `sys_loginfo` VALUES ('391', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:18:00');
-INSERT INTO `sys_loginfo` VALUES ('392', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:21:09');
-INSERT INTO `sys_loginfo` VALUES ('393', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:24:24');
-INSERT INTO `sys_loginfo` VALUES ('394', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:25:17');
-INSERT INTO `sys_loginfo` VALUES ('395', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:00:32');
-INSERT INTO `sys_loginfo` VALUES ('396', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:09:25');
-INSERT INTO `sys_loginfo` VALUES ('397', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:13:50');
-INSERT INTO `sys_loginfo` VALUES ('398', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:14:46');
-INSERT INTO `sys_loginfo` VALUES ('399', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:15:10');
-INSERT INTO `sys_loginfo` VALUES ('400', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:16:12');
-INSERT INTO `sys_loginfo` VALUES ('401', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:17:09');
-INSERT INTO `sys_loginfo` VALUES ('402', 'wlp-wlp', '192.168.30.1', '2020-11-20 12:37:40');
-INSERT INTO `sys_loginfo` VALUES ('403', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 12:38:38');
+INSERT INTO `sys_loginfo` VALUES ('1', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:16:46');
+INSERT INTO `sys_loginfo` VALUES ('2', 'wlp-wlp', '192.168.30.1', '2020-11-20 00:17:12');
+INSERT INTO `sys_loginfo` VALUES ('3', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 00:18:00');
+INSERT INTO `sys_loginfo` VALUES ('404', 'wlp-wlp', '192.168.30.1', '2020-11-20 13:37:54');
+INSERT INTO `sys_loginfo` VALUES ('405', '冰镇土笋冻-wll', '192.168.30.1', '2020-11-20 13:38:36');
+INSERT INTO `sys_loginfo` VALUES ('406', 'wlp-wlp', '192.168.30.1', '2020-11-20 14:03:21');
+INSERT INTO `sys_loginfo` VALUES ('407', 'wlp-wlp', '192.168.30.1', '2020-11-20 14:27:43');
+INSERT INTO `sys_loginfo` VALUES ('408', '超级管理员-system', '0:0:0:0:0:0:0:1', '2020-11-20 14:29:31');
+INSERT INTO `sys_loginfo` VALUES ('409', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-20 14:35:48');
+INSERT INTO `sys_loginfo` VALUES ('410', 'wlp-wlp', '0:0:0:0:0:0:0:1', '2020-11-21 02:26:44');
 
 -- ----------------------------
 -- Table structure for sys_notice
@@ -652,9 +271,8 @@ CREATE TABLE `sys_notice` (
 -- ----------------------------
 -- Records of sys_notice
 -- ----------------------------
-INSERT INTO `sys_notice` VALUES ('54', 'afds', 'dasf', '2020-03-08 03:48:47', '落亦-');
-INSERT INTO `sys_notice` VALUES ('55', '测试', '测试', '2020-03-08 03:53:03', '落亦-');
-INSERT INTO `sys_notice` VALUES ('56', 'sadf', 'asdf', '2020-03-08 04:17:44', '落亦-');
+INSERT INTO `sys_notice` VALUES ('1', '测试', '测试', '2020-03-08 03:53:03', '冰镇土笋冻');
+INSERT INTO `sys_notice` VALUES ('2', 'sadf', 'asdf', '2020-03-08 04:17:44', '冰镇土笋冻');
 
 -- ----------------------------
 -- Table structure for sys_permission
@@ -923,7 +541,7 @@ CREATE TABLE `sys_tenant` (
 -- ----------------------------
 -- Records of sys_tenant
 -- ----------------------------
-INSERT INTO `sys_tenant` VALUES ('21', '好运来家纺', '租户管理员', '郑州', '1', '1', '2020-11-19 17:43:38', '12345678911');
+INSERT INTO `sys_tenant` VALUES ('1', '好运来家纺', '租户管理员', '郑州', '1', '1', '2020-11-19 17:43:38', '12345678911');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -937,7 +555,7 @@ CREATE TABLE `sys_user` (
   `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `sex` int(11) DEFAULT NULL,
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `tenant_id` int(11) DEFAULT NULL COMMENT '租户ID',
+  `tenant_id` int(11) DEFAULT NULL COMMENT '租户(店铺)ID',
   `hiredate` datetime DEFAULT NULL,
   `available` int(11) DEFAULT '1' COMMENT '是否可用，0不可用，1可用',
   `ordernum` int(11) DEFAULT NULL COMMENT '排序码',
@@ -954,7 +572,7 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', '超级管理员', 'system', '532ac00e86893901af5f0be6b704dbc7', '银河系', '1', '超级管理员', '0', '2018-06-25 11:06:34', '1', '1', '0', '2020-02-24/8258FCECC0D64A1DB3B457E7D51D6AB5.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
 INSERT INTO `sys_user` VALUES ('2', '冰镇土笋冻', 'wll', '532ac00e86893901af5f0be6b704dbc7', '郑州', '1', '超级管理员', '0', '2019-11-23 20:52:16', '1', '2', '0', '2020-03-08/0F8C9E01C1DF4A60BB0E2747F67D03BF.jpg', '04A93C74C8294AA09A8B974FD1F4ECBB');
-INSERT INTO `sys_user` VALUES ('23', 'wlp', 'wlp', 'd590d20435ed2a7ff7fbff4ebbd329fd', '郑州', '1', '租户管理员', '21', '2020-11-19 17:44:20', '1', '1', '1', '/images/defaultUserTitle.jpg', '982D52A4C42E428BAB9FB911E85A4568');
+INSERT INTO `sys_user` VALUES ('23', 'wlp', 'wlp', 'd590d20435ed2a7ff7fbff4ebbd329fd', '郑州', '1', '租户管理员', '1', '2020-11-19 17:44:20', '1', '1', '1', '/images/defaultUserTitle.jpg', '982D52A4C42E428BAB9FB911E85A4568');
 
 -- ----------------------------
 -- Table structure for sys_user_role

@@ -56,5 +56,9 @@ public class LogisticsBase implements Serializable {
      */
     private Integer type;
 
+    /**
+     * 商铺（租户）ID，0代表系统租户
+     */
+    private Integer tenantId;
 
 }

@@ -30,27 +30,44 @@ public class Provider implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    /**
+     * 供应商名称
+     */
     private String providername;
 
-    private String zip;
-
+    /**
+     * 供应商地址
+     */
     private String address;
 
+    /**
+     * 供应商电话
+     */
     private String telephone;
 
-    private String connectionperson;
-
-    private String phone;
-
+    /**
+     * 开户银行
+     */
     private String bank;
 
+    /**
+     * 银行账号
+     */
     private String account;
 
+    /**
+     * 邮箱
+     */
     private String email;
 
-    private String fax;
-
+    /**
+     * 是否可用,1代表可用，0代表不可用
+     */
     private Integer available;
 
+    /**
+     * 商铺（租户）ID，0代表系统租户
+     */
+    private Integer tenantId;
 
 }

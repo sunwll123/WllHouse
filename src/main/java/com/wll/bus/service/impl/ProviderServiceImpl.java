@@ -1,12 +1,21 @@
 package com.wll.bus.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wll.bus.entity.Goods;
 import com.wll.bus.entity.Provider;
 import com.wll.bus.mapper.GoodsMapper;
 import com.wll.bus.mapper.ProviderMapper;
 import com.wll.bus.service.IProviderService;
+import com.wll.bus.vo.ProviderVo;
+import com.wll.sys.common.Constast;
+import com.wll.sys.common.DataGridView;
+import com.wll.sys.common.WebUtils;
+import com.wll.sys.entity.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -80,5 +89,36 @@ public class ProviderServiceImpl extends ServiceImpl<ProviderMapper, Provider> i
         this.getBaseMapper().deleteGoodsByProviderId(id);
         //删除供应商
         this.removeById(id);
+    }
+
+    @Override
+    public DataGridView loadAllProvider(ProviderVo providerVo) {
+        //1.声明一个分页page对象
+        IPage<Provider> page = new Page(providerVo.getPage(),providerVo.getLimit());
+        //2.声明一个queryWrapper
+        LambdaQueryWrapper<Provider> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.like(StringUtils.isNotBlank(providerVo.getProvidername()),Provider::getProvidername,providerVo.getProvidername());
+        queryWrapper.like(StringUtils.isNotBlank(providerVo.getAddress()),Provider::getAddress,providerVo.getAddress());
+        queryWrapper.like(StringUtils.isNotBlank(providerVo.getTelephone()),Provider::getTelephone,providerVo.getTelephone());
+        queryWrapper.eq(Provider::getAvailable, Constast.AVAILABLE_TRUE);
+        User user = (User) WebUtils.getSession().getAttribute("user");
+        if (user.getTenantId() != 0){
+            queryWrapper.eq(Provider::getTenantId,user.getTenantId());
+        }
+        queryWrapper.orderByDesc(Provider::getProvidername);
+        page = baseMapper.selectPage(page,queryWrapper);
+        return new DataGridView(page.getTotal(),page.getRecords());
+    }
+
+    @Override
+    public DataGridView loadAllProviderForSelect() {
+        LambdaQueryWrapper<Provider> queryWrapper = new LambdaQueryWrapper<Provider>();
+        queryWrapper.eq(Provider::getAvailable, Constast.AVAILABLE_TRUE);
+        User user = (User) WebUtils.getSession().getAttribute("user");
+        if (user.getTenantId() != 0){
+            queryWrapper.eq(Provider::getTenantId,user.getTenantId());
+        }
+        List<Provider> list = baseMapper.selectList(queryWrapper);
+        return new DataGridView(list);
     }
 }

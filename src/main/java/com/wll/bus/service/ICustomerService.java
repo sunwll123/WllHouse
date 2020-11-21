@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.wll.bus.entity.Customer;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.wll.bus.vo.CustomerVo;
+import com.wll.sys.common.DataGridView;
 
 /**
  * <p>
@@ -22,4 +23,7 @@ public interface ICustomerService extends IService<Customer> {
     void deleteCustomerById(Integer id);
 
     IPage<CustomerVo> list(CustomerVo customerVo);
+
+    DataGridView loadAllCustomerForSelect();
+
 }

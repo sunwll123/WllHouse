@@ -1,6 +1,7 @@
 package com.wll.bus.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wll.bus.entity.Customer;
@@ -9,6 +10,10 @@ import com.wll.bus.mapper.GoodsMapper;
 import com.wll.bus.service.ICustomerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wll.bus.vo.CustomerVo;
+import com.wll.sys.common.Constast;
+import com.wll.sys.common.DataGridView;
+import com.wll.sys.common.WebUtils;
+import com.wll.sys.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * <p>
@@ -76,6 +82,19 @@ public class CustomerServiceImpl extends ServiceImpl<CustomerMapper, Customer> i
         IPage<CustomerVo> page = new Page<>();
         page.setSize(customerVo.getLimit());
         page.setCurrent(customerVo.getPage());
-        return customerMapper.selectListByCondition(page,customerVo.getCustomername(),customerVo.getPhone(),customerVo.getLogisticsBaseId());
+        User user = (User) WebUtils.getSession().getAttribute("user");
+        return customerMapper.selectListByCondition(page,customerVo.getCustomername(),customerVo.getPhone(),customerVo.getLogisticsBaseId(),user.getTenantId());
+    }
+
+    @Override
+    public DataGridView loadAllCustomerForSelect() {
+        LambdaQueryWrapper<Customer> queryWrapper = new LambdaQueryWrapper<Customer>();
+        queryWrapper.eq(Customer::getAvailable, Constast.AVAILABLE_TRUE);
+        User user = (User) WebUtils.getSession().getAttribute("user");
+        if (user.getTenantId() != 0){
+            queryWrapper.eq(Customer::getTenantId,user.getTenantId());
+        }
+        List<Customer> list = baseMapper.selectList(queryWrapper);
+        return new DataGridView(list);
     }
 }

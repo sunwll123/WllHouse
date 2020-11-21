@@ -1,21 +1,16 @@
 package com.wll.bus.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.wll.bus.entity.Provider;
 import com.wll.bus.service.IProviderService;
 import com.wll.bus.vo.ProviderVo;
-import com.wll.sys.common.Constast;
 import com.wll.sys.common.DataGridView;
 import com.wll.sys.common.ResultObj;
-import org.apache.commons.lang3.StringUtils;
+import com.wll.sys.common.WebUtils;
+import com.wll.sys.entity.User;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 /**
  * <p>
@@ -27,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/provider")
+@Log4j2
 public class ProviderController {
 
     @Autowired
@@ -34,50 +30,47 @@ public class ProviderController {
 
     /**
      * 查询所有的供应商
+     *
      * @param providerVo
      * @return
      */
     @RequestMapping("loadAllProvider")
-    public DataGridView loadAllProvider(ProviderVo providerVo){
-        //1.声明一个分页page对象
-        IPage<Provider> page = new Page(providerVo.getPage(),providerVo.getLimit());
-        //2.声明一个queryWrapper
-        QueryWrapper<Provider> queryWrapper = new QueryWrapper();
-        queryWrapper.like(StringUtils.isNotBlank(providerVo.getProvidername()),"providername",providerVo.getProvidername());
-        queryWrapper.like(StringUtils.isNotBlank(providerVo.getConnectionperson()),"connectionperson",providerVo.getConnectionperson());
-        queryWrapper.like(StringUtils.isNotBlank(providerVo.getPhone()),"phone",providerVo.getPhone());
-        providerService.page(page,queryWrapper);
-        return new DataGridView(page.getTotal(),page.getRecords());
+    public DataGridView loadAllProvider(ProviderVo providerVo) {
+        return providerService.loadAllProvider(providerVo);
     }
 
     /**
      * 添加一个供应商
+     *
      * @param providerVo
      * @return
      */
     @RequestMapping("addProvider")
-    public ResultObj addProvider(ProviderVo providerVo){
+    public ResultObj addProvider(ProviderVo providerVo) {
         try {
+            User user = (User) WebUtils.getSession().getAttribute("user");
+            providerVo.setTenantId(user.getTenantId());
             providerService.save(providerVo);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("添加｛｝供应商失败", providerVo.getProvidername(), e);
             return ResultObj.ADD_ERROR;
         }
     }
 
     /**
      * 修改一个供应商
+     *
      * @param providerVo
      * @return
      */
     @RequestMapping("updateProvider")
-    public ResultObj updateProvider(ProviderVo providerVo){
+    public ResultObj updateProvider(ProviderVo providerVo) {
         try {
             providerService.updateById(providerVo);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("编辑｛｝供应商失败", providerVo.getProvidername(), e);
             return ResultObj.UPDATE_ERROR;
         }
     }
@@ -85,16 +78,17 @@ public class ProviderController {
 
     /**
      * 删除一个供应商
+     *
      * @param id
      * @return
      */
     @RequestMapping("deleteProvider")
-    public ResultObj deleteProvider(Integer id){
+    public ResultObj deleteProvider(Integer id) {
         try {
             providerService.deleteProviderById(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("编辑｛｝供应商失败", id, e);
             return ResultObj.DELETE_ERROR;
         }
     }
@@ -102,14 +96,12 @@ public class ProviderController {
 
     /**
      * 加载所有可用的供应商
+     *
      * @return
      */
     @RequestMapping("loadAllProviderForSelect")
-    public DataGridView loadAllProviderForSelect(){
-        QueryWrapper<Provider> queryWrapper = new QueryWrapper<Provider>();
-        queryWrapper.eq("available", Constast.AVAILABLE_TRUE);
-        List<Provider> list = providerService.list(queryWrapper);
-        return new DataGridView(list);
+    public DataGridView loadAllProviderForSelect() {
+        return providerService.loadAllProviderForSelect();
     }
 
 
